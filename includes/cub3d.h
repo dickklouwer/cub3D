@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/07 14:53:34 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/08 11:25:20 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,8 @@ void parse_map(t_map *map, t_player *player);
 // MAP_CHECKS
 int		is_map_surrounded(t_map *map);
 void    map_prerequisites(t_player *player, char *line, int y);
+
+// SCREEN
+void	init_screen(mlx_t **mlx);
 
 #endif

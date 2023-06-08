@@ -6,27 +6,27 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:15:37 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/07 14:59:20 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/08 11:25:46 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int     err_exit(char *str)
+int	err_exit(char *str)
 {
-    ft_putstr_fd(str, 0);
-    exit (EXIT_FAILURE);
+	ft_putstr_fd(str, 0);
+	exit (EXIT_FAILURE);
 }
-size_t ft_strspn(const char *str, const char *accept)
+size_t	ft_strspn(const char *str, const char *accept)
 {
-    size_t count = 0;
+	size_t count = 0;
 
-    while (*str && ft_strchr(accept, *str))
-    {
-        count++;
-        str++;
-    }
-    return count;
+	while (*str && ft_strchr(accept, *str))
+	{
+		count++;
+		str++;
+	}
+	return count;
 }
 
 /* 
@@ -59,27 +59,30 @@ void	config_init(t_config *config, char **argv)
 	config->map_x = 0;
 }
 
-void    map_init(t_map *map, char **argv)
+void	map_init(t_map *map, char **argv)
 {
-    map->map_fd = 0;
-    map->map_y = 0;
-    map->map_x = 0;
-    map->path = argv[1];
+	map->map_fd = 0;
+	map->map_y = 0;
+	map->map_x = 0;
+	map->path = argv[1];
 }
-void    game_init(t_game *game, char **argv)
+void	game_init(t_game *game, char **argv)
 {
 	if (st_file_check(argv[1]))
 		err_exit("Wrong config file extension");
-    map_init(&game->map, argv);
+	map_init(&game->map, argv);
 	config_init(&game->config, argv);
 }
 
-int main(int argc, char **argv) 
+int	main(int argc, char **argv) 
 {
-    t_game  game;
-    
-    if (argc != 2)
-        err_exit("cub3D: 2 Arguments required\n");
-    game_init(&game, argv);
-    parse_game(&game);
+	t_game  game;
+	
+	if (argc != 2)
+		err_exit("cub3D: 2 Arguments required\n");
+	game_init(&game, argv);
+	parse_game(&game);
+	init_screen(&game.mlx);
+	mlx_loop(game.mlx);
+	return (EXIT_SUCCESS);
 }

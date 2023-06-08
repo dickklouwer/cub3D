@@ -6,6 +6,7 @@ SRCS :=	main.c \
 		parser/parsing.c \
 		parser/map_parse.c \
 		parser/map_checks.c \
+		screen/init_screen.c \
 
 SRCSDIR = srcs
 OBJDIR = obj
@@ -44,6 +45,7 @@ $(OBJDIR)/%.o: $(addprefix $(SRCSDIR)/, %.c)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR)/parser
+	@mkdir -p $(OBJDIR)/screen
 
 clean:
 	@echo "$(RED)Cleaning $< $(RESET)"
