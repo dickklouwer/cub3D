@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/07 14:53:34 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/08 14:19:51 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ typedef struct  s_map {
     char        *path;
     char        **map;
 	char		**map_cpy;
+	int			width;
+	int			height;
+	int			map_start;
     int         map_fd;
 	int			map_y;
 	int			map_x;
@@ -39,8 +42,8 @@ typedef struct  s_map {
 }               t_map;
 
 typedef struct  s_player {
-	int		start_x;
-	int		start_y;
+	int		x;
+	int		y;
 	int		player_count;
 	char	orientation;
 }               t_player;
@@ -60,6 +63,7 @@ typedef struct	s_config {
 
 typedef struct s_game
 {
+	int					map_exe;
 	t_map				map;
 	t_config			config;
 	mlx_t				*mlx;
@@ -71,6 +75,13 @@ typedef struct s_game
 // MAIN
 int     err_exit(char *str);
 size_t	ft_strspn(const char *str, const char *accept);
+void    prep_map_data(t_map *map, t_player *player);
+
+// INIT
+void    game_init(t_game *game, char **argv);
+
+// PARSE CONFIG
+void    parse_config(t_config *config, t_game *game);
 
 // PARSER
 int parse_game(t_game *game);
@@ -81,5 +92,11 @@ void parse_map(t_map *map, t_player *player);
 // MAP_CHECKS
 int		is_map_surrounded(t_map *map);
 void    map_prerequisites(t_player *player, char *line, int y);
+
+// PARSE UTILS
+void    parse_color(int *color, char *line);
+int		ft_isdigit_cub3d(char *str);
+size_t	ft_strspn(const char *str, const char *accept);
+
 
 #endif
