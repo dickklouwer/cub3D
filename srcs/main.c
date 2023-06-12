@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:15:37 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/08 11:25:46 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/12 13:08:47 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int	err_exit(char *str)
 {
-	ft_putstr_fd(str, 0);
-	exit (EXIT_FAILURE);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(str, 2);
+	ft_putchar_fd('\n', 2);
+	exit(EXIT_FAILURE);
 }
+
 size_t	ft_strspn(const char *str, const char *accept)
 {
 	size_t count = 0;
@@ -76,13 +79,15 @@ void	game_init(t_game *game, char **argv)
 
 int	main(int argc, char **argv) 
 {
-	t_game  game;
+	t_game	game;
 	
 	if (argc != 2)
 		err_exit("cub3D: 2 Arguments required\n");
 	game_init(&game, argv);
 	parse_game(&game);
 	init_screen(&game.mlx);
+	draw_screen(&game);
 	mlx_loop(game.mlx);
+	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }

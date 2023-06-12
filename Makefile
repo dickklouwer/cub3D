@@ -7,6 +7,8 @@ SRCS :=	main.c \
 		parser/map_parse.c \
 		parser/map_checks.c \
 		screen/init_screen.c \
+		screen/draw_screen.c \
+		screen/floor_and_ceiling.c \
 
 SRCSDIR = srcs
 OBJDIR = obj
