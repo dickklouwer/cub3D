@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 11:58:05 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/12 12:28:45 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/13 10:48:46 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	draw_screen(t_game *game)
 {
-	game->img = mlx_new_image(game->mlx, 256, 256);
+	game->img = mlx_new_image(game->mlx, GAME_WIDTH, GAME_HEIGTH);
 	if (!game->img || (mlx_image_to_window(game->mlx, game->img, 0, 0) < 0))
 		err_exit("Failed to draw screen");
-	mlx_put_pixel(game->img, 0, 0, 0xFF0000FF);
+	draw_floor_and_cailing(game);
 }
