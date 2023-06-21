@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/21 13:06:50 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/21 16:30:11 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	draw_player(t_game *game)
 	int	x;
 	int	y;
 
-	x = 95;
-	while (x < 105)
+	x = MINIMAP_WIDTH - (PLAYER_SIZE / 2);
+	while (x < MINIMAP_WIDTH + (PLAYER_SIZE / 2))
 	{
-		y = 95;
-		while (y < 105)
+		y = MINIMAP_HEIGTH - (PLAYER_SIZE / 2);
+		while (y < MINIMAP_HEIGTH + (PLAYER_SIZE / 2))
 		{
 			mlx_put_pixel(game->img, x, y, 0xFFFF00FF);
 			y++;

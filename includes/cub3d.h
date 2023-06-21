@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/21 15:39:33 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/21 16:29:32 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 #define GAME_WIDTH 1200
 #define GAME_HEIGTH 1200
+#define MINIMAP_WIDTH 100
+#define MINIMAP_HEIGTH 100
+#define PLAYER_SIZE 10
+#define TILE_SIZE 64
 
 # include <math.h>
 # include <stdlib.h>
