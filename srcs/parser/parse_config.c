@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:34:14 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/08 14:29:18 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/21 15:59:32 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	set_config_variables(t_config *config, char **line)
 		config->west_texture = ft_strdup(line[1]);
 	else if (ft_strncmp("EA ", *line, 3) == 0)
 		config->east_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("F ", *line, 2) == 0)
+	else if (ft_strncmp("F ", *line, 1) == 0)
 		parse_color(config->floor_color, line[1]);
-	else if (ft_strncmp("C ", *line, 2) == 0)
+	else if (ft_strncmp("C ", *line, 1) == 0)
 		parse_color(config->ceiling_color, line[1]);
 }
 
