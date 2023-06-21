@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 11:54:54 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/13 10:49:15 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/21 12:47:20 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	draw_floor_and_cailing(t_game *game)
 				mlx_put_pixel(game->img, x, y, ceiling_color);
 			else
 				mlx_put_pixel(game->img, x, y, floor_color);
+			if (game->map.show_minimap && x < 200 && y < 200)
+				mlx_put_pixel(game->img, x, y, 0x00000000);
 			y++;
 		}
 		x++;

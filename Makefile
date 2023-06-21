@@ -9,6 +9,8 @@ SRCS :=	main.c \
 		screen/init_screen.c \
 		screen/draw_screen.c \
 		screen/floor_and_ceiling.c \
+		screen/draw_minimap.c \
+		hooks/arrow_keys.c \
 
 SRCSDIR = srcs
 OBJDIR = obj
@@ -48,6 +50,7 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR)/parser
 	@mkdir -p $(OBJDIR)/screen
+	@mkdir -p $(OBJDIR)/hooks
 
 clean:
 	@echo "$(RED)Cleaning $< $(RESET)"

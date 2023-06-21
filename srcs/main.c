@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:15:37 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/12 13:08:47 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/21 13:10:43 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	map_init(t_map *map, char **argv)
 	map->map_y = 0;
 	map->map_x = 0;
 	map->path = argv[1];
+	map->show_minimap = false;
 }
 void	game_init(t_game *game, char **argv)
 {
@@ -87,6 +88,9 @@ int	main(int argc, char **argv)
 	parse_game(&game);
 	init_screen(&game.mlx);
 	draw_screen(&game);
+	game.minimap->instances->x = -25;
+	game.minimap->instances->y = -25;
+	mlx_loop_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
