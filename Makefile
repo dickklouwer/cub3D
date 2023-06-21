@@ -11,7 +11,9 @@ SRCS :=	main.c \
 		init/game_init.c \
 		screen/draw_screen.c \
 		screen/floor_and_ceiling.c \
-		screen/init_screen.c
+		screen/init_screen.c \
+		screen/draw_minimap.c \
+		hooks/arrow_keys.c \
 
 SRCSDIR = srcs
 OBJDIR = obj
@@ -19,8 +21,8 @@ OBJ := $(addprefix $(OBJDIR)/,$(SRCS:.c=.o))
 CFLAGS := #-Wall -Werror -Wextra -g
 LIBMLX := ./libs/MLX42
 LIBFT := ./libs/libft
-# LIBS := -lglfw -framework Cocoa -framework OpenGL -framework IOKit $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
-LIBS := -L/Users/dklouwer/.brew/Cellar/glfw/3.3.8/lib -lglfw -framework Cocoa -framework OpenGL -framework IOKit $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+LIBS := -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+# LIBS := -L/Users/dklouwer/.brew/Cellar/glfw/3.3.8/lib -lglfw -framework Cocoa -framework OpenGL -framework IOKit $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
 INCLUDES := -I includes/ -I libs/mlx42/include/MLX42/ -I $(LIBFT)
 
 #= COLORS =#
@@ -52,6 +54,8 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR)/parser
 	@mkdir -p $(OBJDIR)/init
+	@mkdir -p $(OBJDIR)/screen
+	@mkdir -p $(OBJDIR)/hooks
 
 clean:
 	@echo "$(RED)Cleaning $< $(RESET)"

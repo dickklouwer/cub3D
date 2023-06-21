@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:15:37 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/08 14:40:14 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/21 15:40:56 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,10 @@ int	err_exit(char *str)
 	exit(EXIT_FAILURE);
 }
 
-size_t	ft_strspn(const char *str, const char *accept)
+int st_file_check(char *file)
 {
-	size_t count = 0;
+	char *filename;
 
-	while (*str && ft_strchr(accept, *str))
-	{
-		count++;
-		str++;
-	}
-	return count;
-}
-
-int st_file_check(char *filename)
-{
 	filename = ft_strnstr(file, ".", ft_strlen(file) + 1);
 	if (!filename || ft_strncmp(filename, ".cub", 4))
 		return (EXIT_FAILURE);
@@ -63,14 +53,7 @@ void	map_init(t_map *map, char **argv)
 	map->map_y = 0;
 	map->map_x = 0;
 	map->path = argv[1];
-}
-
-void	game_init(t_game *game, char **argv)
-{
-	if (st_file_check(argv[1]))
-		err_exit("Wrong config file extension");
-	map_init(&game->map, argv);
-	config_init(&game->config, argv);
+	map->show_minimap = false;
 }
 
 int	main(int argc, char **argv) 
@@ -83,6 +66,9 @@ int	main(int argc, char **argv)
 	parse_game(&game);
 	init_screen(&game.mlx);
 	draw_screen(&game);
+	game.minimap->instances->x = -25;
+	game.minimap->instances->y = -25;
+	mlx_loop_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
