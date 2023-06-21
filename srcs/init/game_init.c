@@ -1,45 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   game_init.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/06 11:15:37 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/08 14:40:14 by tklouwer      ########   odam.nl         */
+/*   Created: 2023/06/08 13:32:10 by tklouwer      #+#    #+#                 */
+/*   Updated: 2023/06/08 14:30:32 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
-int	err_exit(char *str)
+static int	st_file_check(char *file)
 {
-	ft_putstr_fd(str, 2);
-	ft_putchar_fd('\n', 2);
-	exit(EXIT_FAILURE);
-}
+	const char	*filename;
 
-size_t	ft_strspn(const char *str, const char *accept)
-{
-	size_t count = 0;
-
-	while (*str && ft_strchr(accept, *str))
-	{
-		count++;
-		str++;
-	}
-	return count;
-}
-
-int st_file_check(char *filename)
-{
 	filename = ft_strnstr(file, ".", ft_strlen(file) + 1);
-	if (!filename || ft_strncmp(filename, ".cub", 4))
+	if (!filename || ft_strncmp(filename, ".cub", ft_strlen(filename)))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
-void	config_init(t_config *config, char **argv)
+static void	config_init(t_config *config, char **argv)
 {
 	config->map_path = argv[1];
 	config->north_texture = NULL;
@@ -57,11 +40,14 @@ void	config_init(t_config *config, char **argv)
 	config->map_x = 0;
 }
 
-void	map_init(t_map *map, char **argv)
+static void	map_init(t_map *map, char **argv)
 {
 	map->map_fd = 0;
 	map->map_y = 0;
 	map->map_x = 0;
+	map->map_start = 0;
+	map->width = 0;
+	map->height = 0;
 	map->path = argv[1];
 }
 
@@ -71,19 +57,4 @@ void	game_init(t_game *game, char **argv)
 		err_exit("Wrong config file extension");
 	map_init(&game->map, argv);
 	config_init(&game->config, argv);
-}
-
-int	main(int argc, char **argv) 
-{
-	t_game	game;
-	
-	if (argc != 2)
-		err_exit("cub3D: 2 Arguments required\n");
-	game_init(&game, argv);
-	parse_game(&game);
-	init_screen(&game.mlx);
-	draw_screen(&game);
-	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
-	return (EXIT_SUCCESS);
 }

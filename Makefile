@@ -4,8 +4,11 @@
 NAME = cub3D
 SRCS :=	main.c \
 		parser/parsing.c \
-		parser/map_parse.c \
+		parser/parse_map.c \
+		parser/parse_utils.c \
+		parser/parse_config.c \
 		parser/map_checks.c \
+		init/game_init.c \
 		screen/draw_screen.c \
 		screen/floor_and_ceiling.c \
 		screen/init_screen.c
@@ -48,6 +51,7 @@ $(OBJDIR)/%.o: $(addprefix $(SRCSDIR)/, %.c)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR)/parser
+	@mkdir -p $(OBJDIR)/init
 
 clean:
 	@echo "$(RED)Cleaning $< $(RESET)"
