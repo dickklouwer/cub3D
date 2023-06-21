@@ -6,6 +6,9 @@ SRCS :=	main.c \
 		parser/parsing.c \
 		parser/map_parse.c \
 		parser/map_checks.c \
+		screen/draw_screen.c \
+		screen/floor_and_ceiling.c \
+		screen/init_screen.c
 
 SRCSDIR = srcs
 OBJDIR = obj
@@ -13,7 +16,8 @@ OBJ := $(addprefix $(OBJDIR)/,$(SRCS:.c=.o))
 CFLAGS := #-Wall -Werror -Wextra -g
 LIBMLX := ./libs/MLX42
 LIBFT := ./libs/libft
-LIBS :=  -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+# LIBS := -lglfw -framework Cocoa -framework OpenGL -framework IOKit $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
+LIBS := -L/Users/dklouwer/.brew/Cellar/glfw/3.3.8/lib -lglfw -framework Cocoa -framework OpenGL -framework IOKit $(LIBMLX)/libmlx42.a $(LIBFT)/libft.a
 INCLUDES := -I includes/ -I libs/mlx42/include/MLX42/ -I $(LIBFT)
 
 #= COLORS =#
