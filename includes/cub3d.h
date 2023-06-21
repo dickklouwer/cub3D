@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/08 14:19:51 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/08 14:21:23 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,31 @@ typedef struct  s_map {
 	int			width;
 	int			height;
 	int			map_start;
-    int         map_fd;
+   int         map_fd;
 	int			map_y;
 	int			map_x;
 	int			floor_rgb[3];
 	int			ceiling_rgb[3];
 }               t_map;
 
-typedef struct  s_player {
-	int		x;
-	int		y;
+typedef struct	s_player {
+	int		start_x;
+	int		start_y;
 	int		player_count;
 	char	orientation;
-}               t_player;
+}				t_player;
 
 typedef struct	s_config {
 	char	*map_path;
-    char	*north_texture;
-    char	*south_texture;
-    char	*west_texture;
-    char	*east_texture;
-    int		floor_color[3];
-    int		ceiling_color[3];
-    char	**map;
-    int		map_y;
-    int		map_x;
+	char	*north_texture;
+	char	*south_texture;
+	char	*west_texture;
+	char	*east_texture;
+	int		floor_color[3];
+	int		ceiling_color[3];
+	char	**map;
+	int		map_y;
+	int		map_x;
 }				t_config;
 
 typedef struct s_game
@@ -73,7 +73,7 @@ typedef struct s_game
 }				t_game;
 
 // MAIN
-int     err_exit(char *str);
+int		err_exit(char *str);
 size_t	ft_strspn(const char *str, const char *accept);
 void    prep_map_data(t_map *map, t_player *player);
 
@@ -84,14 +84,19 @@ void    game_init(t_game *game, char **argv);
 void    parse_config(t_config *config, t_game *game);
 
 // PARSER
-int parse_game(t_game *game);
+int		parse_game(t_game *game);
 
 // PARSE_MAP
-void parse_map(t_map *map, t_player *player);
+void	 parse_map(t_map *map, t_player *player);
 
 // MAP_CHECKS
 int		is_map_surrounded(t_map *map);
-void    map_prerequisites(t_player *player, char *line, int y);
+void	map_prerequisites(t_player *player, char *line, int y);
+
+// SCREEN
+void	init_screen(mlx_t **mlx);
+void	draw_screen(t_game *game);
+void	draw_floor_and_cailing(t_game *game);
 
 // PARSE UTILS
 void    parse_color(int *color, char *line);
