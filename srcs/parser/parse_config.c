@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:34:14 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/08 14:29:18 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/21 16:03:55 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ int	check_map_start(t_game *game, char *line)
 
 void	set_config_variables(t_config *config, char **line)
 {
-	if (ft_strncmp("NO ", *line, 3) == 0)
+	if (ft_strncmp("NO ", *line, 2) == 0)
 		config->north_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("SO ", *line, 3) == 0)
+	else if (ft_strncmp("SO ", *line, 2) == 0)
 		config->south_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("WE ", *line, 3) == 0)
+	else if (ft_strncmp("WE ", *line, 2) == 0)
 		config->west_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("EA ", *line, 3) == 0)
+	else if (ft_strncmp("EA ", *line, 2) == 0)
 		config->east_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("F ", *line, 2) == 0)
+	else if (ft_strncmp("F ", *line, 1) == 0)
 		parse_color(config->floor_color, line[1]);
-	else if (ft_strncmp("C ", *line, 2) == 0)
+	else if (ft_strncmp("C ", *line, 1) == 0)
 		parse_color(config->ceiling_color, line[1]);
 }
 
@@ -66,9 +66,9 @@ int	validate_config_variables(t_config *config, char **line)
 {
 	if (line[0][0] == '1' || line[0][0] == '0')
 		return (EXIT_FAILURE);
-	if ((ft_strncmp("NO", line[0], 2)) && (ft_strncmp("SO", line[0], 2))
-		&& (ft_strncmp("WE", line[0], 2)) && (ft_strncmp("EA", line[0], 2))
-		&& (ft_strncmp("F", line[0], 1)) && (ft_strncmp("C", line[0], 1))
+	if ((ft_strncmp("NO ", line[0], 3)) && (ft_strncmp("SO ", line[0], 3))
+		&& (ft_strncmp("WE ", line[0], 3)) && (ft_strncmp("EA ", line[0], 3))
+		&& (ft_strncmp("F ", line[0], 2)) && (ft_strncmp("C ", line[0], 2))
 		&& !line[1])
 		err_exit("Wrong variable in config file");
 	return (EXIT_SUCCESS);

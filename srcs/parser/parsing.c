@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:56:30 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/21 15:41:36 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/21 15:54:50 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	flood_fill(int x, int y, t_map *map, char **map_line)
 
 int	parse_game(t_game *game)
 {
-	parse_config(&game->config, game); // DO ADDITIONAL ERROR CHECKINGS AND CODES LIKE DUPLICATES ETC.
+	parse_config(&game->config, game);
 	parse_map(&game->map, &game->player);
 	flood_fill(game->player.x, game->player.y, &game->map, game->map.map_cpy);
 	return (EXIT_SUCCESS);
