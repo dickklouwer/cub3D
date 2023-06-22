@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/22 11:55:57 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 16:59:33 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/22 17:22:14 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	temp_test_draw_walls(t_game *game)
 	angle = -30;
 	while (angle <= 30)
 	{
-		draw_walls(game, distance, angle);
+		// draw_walls(game, distance, angle);
 		angle += 1.0;
 	}
 }

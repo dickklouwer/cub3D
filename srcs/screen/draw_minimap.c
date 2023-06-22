@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 17:04:56 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 17:26:08 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void    raycasting(t_game *game, t_ray *ray, int px, int py)
     while (ray_index <= NUM_RAYS/2) 
     {
         ray->angle = (game->player.pa + ray_index * FOV / NUM_RAYS) * (M_PI/180);
+        printf("%f\n", ray->angle);
         ray->dx = cos(ray->angle);
         ray->dy = sin(ray->angle);
 
@@ -39,6 +40,7 @@ void    raycasting(t_game *game, t_ray *ray, int px, int py)
                 break;
             ray->length++;
         }
+        draw_walls(game, ray->length, ray->angle);
         ray_index++;
     }
 }
