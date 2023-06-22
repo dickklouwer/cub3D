@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 10:04:35 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 11:38:15 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	move_player(t_game *game, int dx, int dy)
 	int new_x;
 	int new_y;
     
-    new_x = game->player.x + dx;
-    new_y = game->player.y + dy;
+    new_x = game->player.sx + dx;
+    new_y = game->player.sy + dy;
 	if (new_x < 0 || new_y < 0 || new_x >= game->map.width || new_y >= game->map.height)
 		return;
 	if (game->map.map[new_y][new_x] == '1')
 		return;
-	game->player.x = new_x;
-	game->player.y = new_y;
+	game->player.sx = new_x;
+	game->player.sy = new_y;
 }
 
 void	draw_player(t_game *game)
@@ -32,15 +32,27 @@ void	draw_player(t_game *game)
 	int	x;
 	int	y;
 
-	x = 94;
-	while (x < 105)
+	x = 0;
+	while (x < PLAYER_SIZE)
 	{
-		y = 94;
-		while (y < 105)
+		y = 0;
+		while (y < PLAYER_SIZE)
 		{
-			mlx_put_pixel(game->img, x, y, 0xFFFF00FF);
+			mlx_put_pixel(game->img, \
+				(MINIMAP_WIDTH / 2) - (PLAYER_SIZE / 2) + x, \
+				(MINIMAP_HEIGTH / 2) - (PLAYER_SIZE / 2) + y, \
+				0xFFFF00FF);
 			y++;
 		}
+		x++;
+	}
+	x = 0;
+	while (x < 10)
+	{
+		mlx_put_pixel(game->img, \
+			(MINIMAP_WIDTH / 2) + (x * game->player.pdx), \
+			(MINIMAP_HEIGTH / 2) + (x * game->player.pdy), \
+			0xFFFF00FF);
 		x++;
 	}
 }
@@ -83,13 +95,10 @@ void	draw_borders(t_game *game)
 		y = 0;
 		while (y < map->height)
 		{
-			if (x == 0 || y == 0 || x == map->width - 1 || y == map->height - 1)
-				color = 0x202020FF;
-			else if (map->map[y][x] == '1')
-                color = 0x202020FF;
-            else
-                color = 0xAAAAAAFF;
-			draw_tile(game, color, x, y);
+			if (y < 0 || y > TILE_SIZE || x < 0 || x > TILE_SIZE)
+				mlx_put_pixel(game->minimap, x, y, 0x202020FF);
+			else
+				mlx_put_pixel(game->minimap, x, y, 0xAAAAAAFF);
 			y++;
 		}
 		x++;

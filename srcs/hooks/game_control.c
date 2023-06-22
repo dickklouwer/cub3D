@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/22 10:07:52 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/22 10:09:34 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 11:38:15 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 */
 void	update_player(t_game *game, int x, int y)
 {
-	game->player.x = x;
-	game->player.y = y;
+	game->player.sx = x;
+	game->player.sy = y;
 }
 
 /* 

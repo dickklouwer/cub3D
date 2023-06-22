@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 11:58:05 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 07:51:16 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 11:35:38 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	draw_screen(t_game *game)
 	game->minimap = mlx_new_image(game->mlx, game->map.height * 64, game->map.width * 64);
 	if (!game->minimap || (mlx_image_to_window(game->mlx, game->minimap, 0, 0) < 0))
 		err_exit("Failed to draw miniscreen");
+	game->minimap->instances->x = round(game->player.px) + (MINIMAP_WIDTH / 2) - (PLAYER_SIZE / 2);
+	game->minimap->instances->y = round(game->player.py) + (MINIMAP_HEIGTH / 2) - (PLAYER_SIZE / 2);
 	update_screen(game);
 }
 
@@ -35,4 +37,5 @@ void	update_screen(t_game *game)
 		draw_minimap(game);
 	mlx_set_instance_depth(game->img->instances, 2);
 	mlx_set_instance_depth(game->minimap->instances, 1);
+	game->map.updata_screen = false;
 }
