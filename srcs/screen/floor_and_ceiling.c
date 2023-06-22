@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 11:54:54 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/21 15:49:30 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/22 11:41:26 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	draw_floor_and_cailing(t_game *game)
 	while (x < GAME_WIDTH)
 	{
 		y = 0;
-		while (y < GAME_HEIGTH)
+		while (y < GAME_HEIGHT)
 		{
-			if (y < GAME_HEIGTH / 2)
+			if (y < GAME_HEIGHT / 2)
 				mlx_put_pixel(game->img, x, y, ceiling_color);
 			else
 				mlx_put_pixel(game->img, x, y, floor_color);

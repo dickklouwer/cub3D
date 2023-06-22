@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:15:37 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/22 12:21:11 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/22 16:38:39 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	map_init(t_map *map, char **argv)
 	map->map_x = 0;
 	map->path = argv[1];
 	map->show_minimap = false;
-	map->updata_screen = true;
+	map->update_screen = true;
 }
 
 int	main(int argc, char **argv) 
@@ -73,3 +73,4 @@ int	main(int argc, char **argv)
 	mlx_terminate(game.mlx);
 	return (EXIT_SUCCESS);
 }
+
