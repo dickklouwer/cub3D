@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 16:34:30 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 16:43:36 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void draw_tile(t_game *game, int color, int x, int y)
         dy = 0;
         while (dy < TILE_SIZE)
         {
-            if(map_x + dx >= 0 && map_x + dx < MINIMAP_WIDTH && map_y + dy >= 0 && map_y + dy < MINIMAP_HEIGHT)
+            if(map_x + dx >= 0 && map_x + dx < MINIMAP_WIDHT && map_y + dy >= 0 && map_y + dy < MINIMAP_HEIGHT)
             {
                 mlx_put_pixel(game->img, map_x + dx, map_y + dy, color);
             }

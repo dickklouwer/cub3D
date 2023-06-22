@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/22 16:36:40 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/22 16:42:38 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CUB3D_H
 
 #define GAME_WIDTH 1200
-#define GAME_HEIGHT 1200
-#define MINIMAP_WIDTH 1200
+#define GAME_HEIGTH 1200
+#define MINIMAP_WIDHT 1200
 #define MINIMAP_HEIGHT 1200
 #define PLAYER_SIZE 4
 #define TILE_SIZE 32
