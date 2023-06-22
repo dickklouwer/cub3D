@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/21 21:10:12 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/22 16:02:25 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct	s_player {
 	double	pa;				// Player angle
 	double	pdx;			// Player delta x
 	double	pdy;			// Player delta y
+	int		view_angle;		// Player view angle
+	double	angle_step;
 	int		player_count;
 	char	orientation;
 }				t_player;
@@ -112,6 +114,8 @@ void	init_screen(mlx_t **mlx);
 void	draw_screen(t_game *game);
 void	update_screen(t_game *game);
 void	draw_floor_and_cailing(t_game *game);
+void	temp_test_draw_walls(t_game *game);	// temp
+void	draw_walls(t_game *game, float distance, double angle);
 
 // PARSE UTILS
 void	parse_color(int *color, char *line);

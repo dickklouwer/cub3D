@@ -13,6 +13,7 @@ SRCS :=	main.c \
 		screen/floor_and_ceiling.c \
 		screen/init_screen.c \
 		screen/draw_minimap.c \
+		screen/3d_walls.c \
 		hooks/arrow_keys.c \
 
 SRCSDIR = srcs

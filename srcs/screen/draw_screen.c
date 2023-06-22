@@ -6,16 +6,11 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 11:58:05 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/21 21:16:42 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/22 12:13:22 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	draw_walls(t_game *game)
-{
-
-}
 
 void	draw_screen(t_game *game)
 {
