@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/22 16:57:30 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 17:05:09 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CUB3D_H
 
 #define GAME_WIDTH 1200
-#define GAME_HEIGHT 1200
-#define MINIMAP_WIDTH 1200
+#define GAME_HEIGTH 1200
+#define MINIMAP_WIDHT 1200
 #define MINIMAP_HEIGHT 1200
 #define PLAYER_SIZE 4
 #define TILE_SIZE 32
@@ -56,6 +56,8 @@ typedef struct	s_player {
 	double	pa;				// Player angle
 	double	pdx;			// Player delta x
 	double	pdy;			// Player delta y
+	int		view_angle;		// Player view angle
+	double	angle_step;
 	int		player_count;
 	char	orientation;
 }				t_player;
@@ -123,6 +125,8 @@ void	init_screen(mlx_t **mlx);
 void	draw_screen(t_game *game);
 void	update_screen(t_game *game);
 void	draw_floor_and_cailing(t_game *game);
+void	temp_test_draw_walls(t_game *game);	// temp
+void	draw_walls(t_game *game, float distance, double angle);
 
 // PARSE UTILS
 void	parse_color(int *color, char *line);

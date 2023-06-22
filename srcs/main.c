@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:15:37 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/22 17:00:53 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 17:04:50 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	main(int argc, char **argv)
 	parse_game(&game);
 	init_screen(&game.mlx);
 	draw_screen(&game);
+	temp_test_draw_walls(&game);
 	mlx_loop_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
