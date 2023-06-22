@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:32:10 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/22 12:29:56 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 16:58:08 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ void	init_player(t_player *player)
 
 void	game_init(t_game *game, char **argv)
 {
+	game->ray = malloc(sizeof(t_ray));
+	if (!game->ray)
+		perror("Failed to allocate memory..");
 	if (st_file_check(argv[1]))
 		err_exit("Wrong config file extension");
 	map_init(&game->map, argv);

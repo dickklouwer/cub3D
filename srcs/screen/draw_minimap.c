@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 16:34:30 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 17:00:09 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,28 @@
 #define NUM_RAYS 30
 #define MAX_RAY_LENGTH 10000
 
-void    raycasting(t_game *game, int px, int py)
+void    raycasting(t_game *game, t_ray *ray, int px, int py)
 {
-    int ray;
-    int ray_px;
-    int ray_py;
-    int ray_length;
+    int ray_index;
 
-    ray = -NUM_RAYS / 2;
-    while (ray <= NUM_RAYS/2) 
+    ray_index = -NUM_RAYS / 2;
+    while (ray_index <= NUM_RAYS/2) 
     {
-        double ray_angle = (game->player.pa + ray * FOV / NUM_RAYS) * (M_PI/180);
-        double ray_dx = cos(ray_angle);
-        double ray_dy = sin(ray_angle);
+        ray->angle = (game->player.pa + ray_index * FOV / NUM_RAYS) * (M_PI/180);
+        ray->dx = cos(ray->angle);
+        ray->dy = sin(ray->angle);
 
-        ray_length = 0;
-        while (ray_length < MAX_RAY_LENGTH)
+        ray->length = 0;
+        while (ray->length < MAX_RAY_LENGTH)
         {
-            ray_px = px + ray_length * ray_dx;
-            ray_py = py + ray_length * ray_dy;
-            mlx_put_pixel(game->img, ray_px, ray_py, 0xFFFF00FF);
-            if (game->map.map[ray_py / TILE_SIZE][ray_px / TILE_SIZE] == '1')
-            {
+            ray->px = px + ray->length * ray->dx;
+            ray->py = py + ray->length * ray->dy;
+            mlx_put_pixel(game->img, ray->px, ray->py, 0xFFFF00FF);
+            if (game->map.map[ray->py / TILE_SIZE][ray->px / TILE_SIZE] == '1')
                 break;
-            }
-            ray_length++;
+            ray->length++;
         }
-        ray++;
+        ray_index++;
     }
 }
 void draw_player(t_game *game)
@@ -65,10 +60,8 @@ void draw_player(t_game *game)
         }
         x++;
     }
-    raycasting(game, px, py);
+    raycasting(game, game->ray, px, py);
 }
-
-
 
 void draw_tile(t_game *game, int color, int x, int y)
 {
@@ -119,7 +112,6 @@ void draw_borders(t_game *game)
         x++;
     }
 }
-
 
 void	draw_minimap(t_game *game)
 {

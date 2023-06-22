@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/22 14:37:13 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 16:57:30 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,22 @@ typedef struct	s_config {
 	int		map_x;
 }				t_config;
 
+typedef struct  s_ray
+{
+    double angle;
+    double dx;
+    double dy;
+    int    px;
+    int    py;
+    int    length;
+}               t_ray;
+
 typedef struct s_game
 {
 	int					map_exe;
 	t_map				map;
 	t_config			config;
+	t_ray				*ray;
 	mlx_t				*mlx;
 	mlx_image_t			*img;
 	mlx_image_t			*minimap;
