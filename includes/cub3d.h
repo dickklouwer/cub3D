@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/21 15:39:33 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/22 10:08:54 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,6 @@ typedef struct	s_map {
 typedef struct	s_player {
 	int		x;
 	int		y;
-	int		start_x;
-	int		start_y;
-	int		pos_x;
-	int		pos_y;
 	int		player_count;
 	char	orientation;
 }				t_player;
@@ -111,9 +107,13 @@ int		ft_isdigit_cub3d(char *str);
 size_t	ft_strspn(const char *str, const char *accept);
 
 // MINIMAP
-void	draw_2d_map(t_game *game);
+void	draw_minimap(t_game *game);
 
 // HOOKS
 void	ft_hook(void *para);
+void	my_keyhook(mlx_key_data_t key_data, void *param);
+
+void	update_map(t_game *game, int x, int y, char tile);
+void	update_player(t_game *game, int x, int y);
 
 #endif
