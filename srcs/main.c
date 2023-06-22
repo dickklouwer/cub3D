@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:15:37 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/22 11:36:27 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 11:41:50 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	map_init(t_map *map, char **argv)
 	map->map_x = 0;
 	map->path = argv[1];
 	map->show_minimap = false;
-	map->updata_screen = true;
+	map->update_screen = true;
 }
 
 int	main(int argc, char **argv) 

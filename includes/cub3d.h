@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/22 11:38:29 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 14:37:13 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define CUB3D_H
 
 #define GAME_WIDTH 1200
-#define GAME_HEIGTH 1200
-#define MINIMAP_WIDTH 200
-#define MINIMAP_HEIGTH 200
+#define GAME_HEIGHT 1200
+#define MINIMAP_WIDTH 1200
+#define MINIMAP_HEIGHT 1200
 #define PLAYER_SIZE 4
 #define TILE_SIZE 32
 #define RAD 0.0174533
@@ -45,7 +45,7 @@ typedef struct	s_map {
 	int			floor_rgb[3];
 	int			ceiling_rgb[3];
 	bool		show_minimap;
-	bool		updata_screen;
+	bool		update_screen;
 }				t_map;
 
 typedef struct	s_player {
@@ -123,9 +123,5 @@ void	draw_minimap(t_game *game);
 
 // HOOKS
 void	ft_hook(void *para);
-void	my_keyhook(mlx_key_data_t key_data, void *param);
-
-void	update_map(t_game *game, int x, int y, char tile);
-void	update_player(t_game *game, int x, int y);
 
 #endif

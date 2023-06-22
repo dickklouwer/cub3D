@@ -14,7 +14,6 @@ SRCS :=	main.c \
 		screen/init_screen.c \
 		screen/draw_minimap.c \
 		hooks/arrow_keys.c \
-		hooks/game_control.c \
 
 SRCSDIR = srcs
 OBJDIR = obj
