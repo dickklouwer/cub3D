@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/22 11:55:57 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 17:22:14 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 18:02:18 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,15 @@ void	draw_walls(t_game *game, float distance, double angle)
 
 	distance *= cos(angle * (M_PI / 180));
 	wall_height = GAME_HEIGTH / distance * TILE_SIZE / 4;
-	if (wall_height > GAME_HEIGTH)
-		wall_height = GAME_HEIGTH;
+	printf("wall height %d\n", wall_height);
+	if (wall_height * 2 > GAME_HEIGTH)
+		wall_height = GAME_HEIGTH / 2;
 	if (wall_height < 0)
 		wall_height = 0;
+	// if (wall_height > GAME_HEIGTH)
+	// 	wall_height = GAME_HEIGTH;
+	// if (wall_height < 0)
+	// 	wall_height = 0;
 	casted_rays = game->player.view_angle / game->player.angle_step;
 	scale = GAME_WIDTH / casted_rays;
 	i = 0;
@@ -40,7 +45,7 @@ void	draw_walls(t_game *game, float distance, double angle)
 		y = 0;
 		while (y < wall_height * 2)
 		{
-			mlx_put_pixel(game->img, x + i, (GAME_HEIGTH / 2) - (wall_height) + y, 0x202020FF);
+			mlx_put_pixel(game->img, x + i, (GAME_HEIGTH / 2) - (wall_height) + y, 0xCCCCCCFF);
 			y++;
 		}
 		i++;

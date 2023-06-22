@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 17:26:08 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/22 17:58:44 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,20 @@
 #define MINIMAP_OFFSET_X 0;
 #define MINIMAP_OFFSET_Y 0;
 #define FOV 60
-#define NUM_RAYS 30
+#define NUM_RAYS 60
 #define MAX_RAY_LENGTH 10000
 
 void    raycasting(t_game *game, t_ray *ray, int px, int py)
 {
     int ray_index;
+	int relative_angle;
 
     ray_index = -NUM_RAYS / 2;
     while (ray_index <= NUM_RAYS/2) 
     {
         ray->angle = (game->player.pa + ray_index * FOV / NUM_RAYS) * (M_PI/180);
-        printf("%f\n", ray->angle);
         ray->dx = cos(ray->angle);
         ray->dy = sin(ray->angle);
-
         ray->length = 0;
         while (ray->length < MAX_RAY_LENGTH)
         {
@@ -40,7 +39,8 @@ void    raycasting(t_game *game, t_ray *ray, int px, int py)
                 break;
             ray->length++;
         }
-        draw_walls(game, ray->length, ray->angle);
+		relative_angle = (ray->angle * (180 / M_PI)) - game->player.pa;
+        draw_walls(game, ray->length, relative_angle);
         ray_index++;
     }
 }
