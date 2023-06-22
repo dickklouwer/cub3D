@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:56:30 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/21 15:54:50 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/21 17:28:06 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	parse_game(t_game *game)
 {
 	parse_config(&game->config, game);
 	parse_map(&game->map, &game->player);
-	flood_fill(game->player.x, game->player.y, &game->map, game->map.map_cpy);
+	init_player(&game->player);
+	flood_fill(game->player.sx, game->player.sy, &game->map, game->map.map_cpy);
 	return (EXIT_SUCCESS);
 }

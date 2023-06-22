@@ -6,11 +6,11 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:32:10 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/08 14:30:32 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/21 21:00:50 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 static int	st_file_check(char *file)
 {
@@ -49,6 +49,22 @@ static void	map_init(t_map *map, char **argv)
 	map->width = 0;
 	map->height = 0;
 	map->path = argv[1];
+}
+
+void	init_player(t_player *player)
+{
+	player->px = (-player->sx * TILE_SIZE) - (TILE_SIZE / 2) + (PLAYER_SIZE / 2);
+	player->py = (-player->sy * TILE_SIZE) - (TILE_SIZE / 2) + (PLAYER_SIZE / 2);
+	if (player->orientation == 'N')
+		player->pa = 270;
+	else if (player->orientation == 'S')
+		player->pa = 90;
+	else if (player->orientation == 'E')
+		player->pa = 180;
+	else if (player->orientation == 'W')
+		player->pa = 0;
+	player->pdx = cos(player->pa / 180 * M_PI);
+	player->pdy = sin(player->pa / 180 * M_PI);
 }
 
 void	game_init(t_game *game, char **argv)

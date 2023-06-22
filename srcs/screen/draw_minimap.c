@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/21 16:30:11 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/21 21:24:07 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,27 @@ void	draw_player(t_game *game)
 	int	x;
 	int	y;
 
-	x = MINIMAP_WIDTH - (PLAYER_SIZE / 2);
-	while (x < MINIMAP_WIDTH + (PLAYER_SIZE / 2))
+	x = 0;
+	while (x < PLAYER_SIZE)
 	{
-		y = MINIMAP_HEIGTH - (PLAYER_SIZE / 2);
-		while (y < MINIMAP_HEIGTH + (PLAYER_SIZE / 2))
+		y = 0;
+		while (y < PLAYER_SIZE)
 		{
-			mlx_put_pixel(game->img, x, y, 0xFFFF00FF);
+			mlx_put_pixel(game->img, \
+				(MINIMAP_WIDTH / 2) - (PLAYER_SIZE / 2) + x, \
+				(MINIMAP_HEIGTH / 2) - (PLAYER_SIZE / 2) + y, \
+				0xFFFF00FF);
 			y++;
 		}
+		x++;
+	}
+	x = 0;
+	while (x < 10)
+	{
+		mlx_put_pixel(game->img, \
+			(MINIMAP_WIDTH / 2) + (x * game->player.pdx), \
+			(MINIMAP_HEIGTH / 2) + (x * game->player.pdy), \
+			0xFFFF00FF);
 		x++;
 	}
 }
@@ -41,7 +53,7 @@ void	draw_minimap_walls(t_game *game)
 		y = 0;
 		while (y < 300)
 		{
-			if (y < 150 || y > 175 || x < 150 || x > 175)
+			if (y < 0 || y > TILE_SIZE || x < 0 || x > TILE_SIZE)
 				mlx_put_pixel(game->minimap, x, y, 0x202020FF);
 			else
 				mlx_put_pixel(game->minimap, x, y, 0xAAAAAAFF);

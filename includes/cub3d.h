@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/21 16:29:32 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/21 21:10:12 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 #define GAME_WIDTH 1200
 #define GAME_HEIGTH 1200
-#define MINIMAP_WIDTH 100
-#define MINIMAP_HEIGTH 100
-#define PLAYER_SIZE 10
-#define TILE_SIZE 64
+#define MINIMAP_WIDTH 200
+#define MINIMAP_HEIGTH 200
+#define PLAYER_SIZE 4
+#define TILE_SIZE 32
+#define RAD 0.0174533
 
 # include <math.h>
 # include <stdlib.h>
@@ -44,15 +45,17 @@ typedef struct	s_map {
 	int			floor_rgb[3];
 	int			ceiling_rgb[3];
 	bool		show_minimap;
+	bool		updata_screen;
 }				t_map;
 
 typedef struct	s_player {
-	int		x;
-	int		y;
-	int		start_x;
-	int		start_y;
-	int		pos_x;
-	int		pos_y;
+	int		sx;				// Start x
+	int		sy;				// Start y
+	double	px; 			// Player x
+	double	py;				// Player y
+	double	pa;				// Player angle
+	double	pdx;			// Player delta x
+	double	pdy;			// Player delta y
 	int		player_count;
 	char	orientation;
 }				t_player;
@@ -85,10 +88,11 @@ typedef struct s_game
 // MAIN
 int		err_exit(char *str);
 size_t	ft_strspn(const char *str, const char *accept);
-void    prep_map_data(t_map *map, t_player *player);
+void	prep_map_data(t_map *map, t_player *player);
 
 // INIT
-void    game_init(t_game *game, char **argv);
+void	game_init(t_game *game, char **argv);
+void	init_player(t_player *player);
 
 // PARSE CONFIG
 void    parse_config(t_config *config, t_game *game);
