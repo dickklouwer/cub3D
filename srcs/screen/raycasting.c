@@ -35,6 +35,8 @@ void calculate_raycast(t_game *game, t_ray *rays, int px, int py)
         {
             ray->px = px + ray->length * ray->dx;
             ray->py = py + ray->length * ray->dy;
+			if (game->map.show_minimap)
+				mlx_put_pixel(game->img, ray->px, ray->py, 0xFFFF00FF);
             if (ray->px / TILE_SIZE >= 0 && ray->px / TILE_SIZE < game->map.width && ray->py / TILE_SIZE >= 0 && ray->py / TILE_SIZE < game->map.height)
             {
                 if (game->map.map[ray->py / TILE_SIZE][ray->px / TILE_SIZE] == '1')
