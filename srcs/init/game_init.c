@@ -6,18 +6,18 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:32:10 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/23 11:26:11 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/23 16:16:11 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	st_file_check(char *file)
+int st_file_check(char *file)
 {
-	const char	*filename;
+	char *filename;
 
 	filename = ft_strnstr(file, ".", ft_strlen(file) + 1);
-	if (!filename || ft_strncmp(filename, ".cub", ft_strlen(filename)))
+	if (!filename || ft_strncmp(filename, ".cub", 4) || ft_strlen(filename) != 4)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -69,11 +69,11 @@ void	init_player(t_player *player)
 
 void	game_init(t_game *game, char **argv)
 {
+	if (st_file_check(argv[1]))
+		err_exit("Wrong config file extension");
 	game->ray = malloc(sizeof(t_ray));
 	if (!game->ray)
 		perror("Failed to allocate memory..");
-	if (st_file_check(argv[1]))
-		err_exit("Wrong config file extension");
 	map_init(&game->map, argv);
 	config_init(&game->config, argv);
 }

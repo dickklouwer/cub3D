@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:34:14 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/21 17:27:30 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/23 16:08:22 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ int	check_map_start(t_game *game, char *line)
 
 void	set_config_variables(t_config *config, char **line)
 {
-	if (ft_strncmp("NO ", *line, 2) == 0)
+	if (ft_strncmp("N", *line, 2) == 0)
 		config->north_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("SO ", *line, 2) == 0)
+	else if (ft_strncmp("S", *line, 2) == 0)
 		config->south_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("WE ", *line, 2) == 0)
+	else if (ft_strncmp("W", *line, 2) == 0)
 		config->west_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("EA ", *line, 2) == 0)
+	else if (ft_strncmp("E", *line, 2) == 0)
 		config->east_texture = ft_strdup(line[1]);
 	else if (ft_strncmp("F ", *line, 1) == 0)
 		parse_color(config->floor_color, line[1]);
@@ -66,8 +66,8 @@ int	validate_config_variables(t_config *config, char **line)
 {
 	if (line[0][0] == '1' || line[0][0] == '0')
 		return (EXIT_FAILURE);
-	if ((ft_strncmp("NO ", line[0], 3)) && (ft_strncmp("SO ", line[0], 3))
-		&& (ft_strncmp("WE ", line[0], 3)) && (ft_strncmp("EA ", line[0], 3))
+	if ((ft_strncmp("N", line[0], 2)) && (ft_strncmp("S", line[0], 1))
+		&& (ft_strncmp("W", line[0], 1)) && (ft_strncmp("E", line[0], 1))
 		&& (ft_strncmp("F ", line[0], 2)) && (ft_strncmp("C ", line[0], 2))
 		&& !line[1])
 		err_exit("Wrong variable in config file");

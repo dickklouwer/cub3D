@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EXE="../cub3D"
+EXE="./cub3D"
 
 # Colors
 RED='\033[1;31m'

@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:15:37 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/23 11:29:29 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/23 16:18:29 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,6 @@ int	err_exit(char *str)
 	ft_putstr_fd(str, 2);
 	ft_putchar_fd('\n', 2);
 	exit(EXIT_FAILURE);
-}
-
-int st_file_check(char *file)
-{
-	char *filename;
-
-	filename = ft_strnstr(file, ".", ft_strlen(file) + 1);
-	if (!filename || ft_strncmp(filename, ".cub", 4))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
 }
 
 void	config_init(t_config *config, char **argv)
@@ -75,3 +65,9 @@ int	main(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
+// Running cub3D with Archive/scenes/invalid/two_players.cub
+// Running cub3D with Archive/scenes/invalid/missing_one_color.cub
+// Running cub3D with Archive/scenes/invalid/invalid_texture_path.cub
+// Running cub3D with Archive/scenes/invalid/invalid_texture_path.cub
+// Running cub3D with Archive/scenes/invalid/duplicate_texture.cub
+// Running cub3D with Archive/scenes/invalid/duplicate_color.cub

@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/07 11:47:25 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/21 17:20:55 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/23 16:01:26 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	map_prerequisites(t_player *player, char *line, int y)
 			else if (line[i] == ' ')
 				break ;
 			else
-				err_exit("Wrong map tile");
+				err_exit("Given map not parseable");
 		}
 		i++;
 	}
