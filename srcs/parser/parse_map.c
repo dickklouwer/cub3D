@@ -6,11 +6,11 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/07 11:44:19 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/08 14:27:39 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/23 15:58:08 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 static void	map_copy(t_map *map)
 {

@@ -10,7 +10,7 @@
 // /*                                                                            */
 // /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 #define MINIMAP_OFFSET_X 0;
 #define MINIMAP_OFFSET_Y 0;

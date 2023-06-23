@@ -6,11 +6,11 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/23 11:56:42 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/23 12:04:41 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/23 15:57:50 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../includes/cub3d.h"
 
 void calculate_player(t_game *game, t_ray *rays, int px, int py)
 {
