@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/22 17:05:09 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/23 13:32:01 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,14 @@ int		ft_isdigit_cub3d(char *str);
 size_t	ft_strspn(const char *str, const char *accept);
 
 // MINIMAP
-void	draw_minimap(t_game *game);
+void	draw_game(t_game *game);
 
 // HOOKS
 void	ft_hook(void *para);
+
+void calculate_raycast(t_game *game, t_ray *rays, int px, int py);
+void draw_raycast(t_game *game, t_ray *rays);
+void calculate_player(t_game *game, t_ray *rays, int px, int py);
+void    draw_player(t_game *game, t_ray *rays, int px, int py);
 
 #endif

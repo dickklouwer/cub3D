@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 11:58:05 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 17:58:14 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/23 13:31:25 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ void	draw_screen(t_game *game)
 void	update_screen(t_game *game)
 {
 	draw_floor_and_cailing(game);
-	if (game->map.show_minimap)
-		draw_minimap(game);
+	draw_game(game);
 	mlx_set_instance_depth(game->img->instances, 1);
-	mlx_set_instance_depth(game->minimap->instances, 1);
+	mlx_set_instance_depth(game->minimap->instances, 2);
 	game->map.update_screen = false;
 }

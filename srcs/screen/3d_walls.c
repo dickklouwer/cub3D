@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/22 11:55:57 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 18:02:18 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/23 11:33:40 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,19 @@ void	draw_walls(t_game *game, float distance, double angle)
 	int		scale;
 	int		wall_height;
 
+	game->player.view_angle = 60;
+	game->player.angle_step = 1;
 	distance *= cos(angle * (M_PI / 180));
 	wall_height = GAME_HEIGTH / distance * TILE_SIZE / 4;
-	printf("wall height %d\n", wall_height);
 	if (wall_height * 2 > GAME_HEIGTH)
 		wall_height = GAME_HEIGTH / 2;
 	if (wall_height < 0)
 		wall_height = 0;
-	// if (wall_height > GAME_HEIGTH)
-	// 	wall_height = GAME_HEIGTH;
-	// if (wall_height < 0)
-	// 	wall_height = 0;
 	casted_rays = game->player.view_angle / game->player.angle_step;
 	scale = GAME_WIDTH / casted_rays;
 	i = 0;
 	x = (angle * scale) + (GAME_WIDTH / 2);
+
 	while (i < scale && x + i < GAME_WIDTH)
 	{
 		y = 0;
