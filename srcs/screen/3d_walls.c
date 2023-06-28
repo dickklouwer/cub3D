@@ -6,62 +6,50 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/22 11:55:57 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/23 11:33:40 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/28 13:17:17 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/// @brief 
-/// @param game the game struct
-/// @param distance the distance to the wall
-/// @param angle the relative angle for the player
-void	draw_walls(t_game *game, float distance, double angle)
+int	range(int value, int min, int max)
 {
-	int		i;
-	int		x;
-	int		y;
-	int		casted_rays;
-	int		scale;
-	int		wall_height;
-
-	game->player.view_angle = 60;
-	game->player.angle_step = 1;
-	distance *= cos(angle * (M_PI / 180));
-	wall_height = GAME_HEIGTH / distance * TILE_SIZE / 4;
-	if (wall_height * 2 > GAME_HEIGTH)
-		wall_height = GAME_HEIGTH / 2;
-	if (wall_height < 0)
-		wall_height = 0;
-	casted_rays = game->player.view_angle / game->player.angle_step;
-	scale = GAME_WIDTH / casted_rays;
-	i = 0;
-	x = (angle * scale) + (GAME_WIDTH / 2);
-
-	while (i < scale && x + i < GAME_WIDTH)
-	{
-		y = 0;
-		while (y < wall_height * 2)
-		{
-			mlx_put_pixel(game->img, x + i, (GAME_HEIGTH / 2) - (wall_height) + y, 0xCCCCCCFF);
-			y++;
-		}
-		i++;
-	}
+	if (value < min)
+		return (min);
+	if (value > max)
+		return (max);
+	return (value);
 }
 
-void	temp_test_draw_walls(t_game *game)
+void	draw_wals(t_game *game, t_ray *ray)
 {
-	double	angle;
-	double	distance;
+	int	x;
+	int	x_start;
+	int	x_end;
+	int	y;
+	int	y_start;
+	int	y_end;
+	int	wall_height;
 
-	game->player.view_angle = 60;
-	game->player.angle_step = 1;
-	distance = (1 * TILE_SIZE) + (TILE_SIZE / 2);
-	angle = -30;
-	while (angle <= 30)
+	ray->length *= cos(ray->angle * (M_PI / 180));
+	wall_height = (game->config.tile_size / ray->length) * ((GAME_WIDTH / 2) / tan((game->config.fov / 2) * (M_PI / 180)));
+	x_start = (ray->angle + (game->config.fov / 2)) * (GAME_WIDTH / game->config.fov);
+	x_end = x_start + (GAME_WIDTH / game->config.num_rays);
+	// printf("ray->angle: %f\n", ray->angle);
+	// printf("x_start: %d\n", x_start);
+	// printf("x_end: %d\n", x_end);
+	// printf("wall_height: %d\n", wall_height);
+	x = x_start;
+	while (x <= x_end)
 	{
-		// draw_walls(game, distance, angle);
-		angle += 1.0;
+		y_start = (GAME_HEIGTH / 2) - (wall_height / 2);
+		y_end = y_start + wall_height;
+		y = y_start;
+		while (y <= y_end)
+		{
+			mlx_put_pixel(game->img, range(x, 0, GAME_WIDTH - 1), range(y, 0, GAME_HEIGTH - 1), 0xCCCCCCFF);
+			y++;
+		}
+		x++;
 	}
 }

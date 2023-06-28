@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/23 13:32:01 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/28 11:55:56 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@
 #define MINIMAP_WIDHT 1200
 #define MINIMAP_HEIGHT 1200
 #define PLAYER_SIZE 4
-#define TILE_SIZE 32
+// #define TILE_SIZE 32
 #define RAD 0.0174533
+// #define FOV 60
+// #define NUM_RAYS 120
+#define MAX_RAY_LENGTH 10000
+#define WALL_HEIGHT_FACTOR 1.5
 
 # include <math.h>
 # include <stdlib.h>
@@ -56,8 +60,8 @@ typedef struct	s_player {
 	double	pa;				// Player angle
 	double	pdx;			// Player delta x
 	double	pdy;			// Player delta y
-	int		view_angle;		// Player view angle
-	double	angle_step;
+	// int		view_angle;		// Player view angle
+	// double	angle_step;
 	int		player_count;
 	char	orientation;
 }				t_player;
@@ -73,6 +77,10 @@ typedef struct	s_config {
 	char	**map;
 	int		map_y;
 	int		map_x;
+	int		tile_size;
+	int		fov;
+	int		num_rays;
+	double	angle_step;
 }				t_config;
 
 typedef struct  s_ray
@@ -82,7 +90,7 @@ typedef struct  s_ray
     double dy;
     int    px;
     int    py;
-    int    length;
+    double length;
 }               t_ray;
 
 typedef struct s_game
@@ -105,7 +113,7 @@ void	prep_map_data(t_map *map, t_player *player);
 
 // INIT
 void	game_init(t_game *game, char **argv);
-void	init_player(t_player *player);
+void	init_player(t_game *game);
 
 // PARSE CONFIG
 void    parse_config(t_config *config, t_game *game);
@@ -125,8 +133,9 @@ void	init_screen(mlx_t **mlx);
 void	draw_screen(t_game *game);
 void	update_screen(t_game *game);
 void	draw_floor_and_cailing(t_game *game);
-void	temp_test_draw_walls(t_game *game);	// temp
-void	draw_walls(t_game *game, float distance, double angle);
+void	draw_wals(t_game *game, t_ray *ray);
+// void	draw_walls(t_game *game, float distance, double angle);
+// void	draw_3d_walls(mlx_image_t *image, t_ray *rays, uint32_t wall_color, uint32_t background_color);
 
 // PARSE UTILS
 void	parse_color(int *color, char *line);

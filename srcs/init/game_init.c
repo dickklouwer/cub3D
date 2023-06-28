@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:32:10 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/23 11:26:11 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/28 13:16:51 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ static void	config_init(t_config *config, char **argv)
 	config->map = NULL;
 	config->map_y = 0;
 	config->map_x = 0;
+	config->tile_size = 32;
+	config->fov = 60;
+	config->num_rays = 1200;
+	config->angle_step = (double)config->fov / (double)config->num_rays;
 }
 
 static void	map_init(t_map *map, char **argv)
@@ -51,20 +55,20 @@ static void	map_init(t_map *map, char **argv)
 	map->path = argv[1];
 }
 
-void	init_player(t_player *player)
+void	init_player(t_game *game)
 {
-	player->px = (player->sx * TILE_SIZE) - (TILE_SIZE / 2) + (PLAYER_SIZE / 2);
-	player->py = (player->sy * TILE_SIZE) - (TILE_SIZE / 2) + (PLAYER_SIZE / 2);
-	if (player->orientation == 'N')
-		player->pa = 270;
-	else if (player->orientation == 'S')
-		player->pa = 90;
-	else if (player->orientation == 'E')
-		player->pa = 180;
-	else if (player->orientation == 'W')
-		player->pa = 0;
-	player->pdx = cos(player->pa / 180 * M_PI);
-	player->pdy = sin(player->pa / 180 * M_PI);
+	game->player.px = (game->player.sx * game->config.tile_size) - (game->config.tile_size / 2) + (PLAYER_SIZE / 2);
+	game->player.py = (game->player.sy * game->config.tile_size) - (game->config.tile_size / 2) + (PLAYER_SIZE / 2);
+	if (game->player.orientation == 'N')
+		game->player.pa = 270;
+	else if (game->player.orientation == 'S')
+		game->player.pa = 90;
+	else if (game->player.orientation == 'E')
+		game->player.pa = 180;
+	else if (game->player.orientation == 'W')
+		game->player.pa = 0;
+	game->player.pdx = cos(game->player.pa / 180 * M_PI);
+	game->player.pdy = sin(game->player.pa / 180 * M_PI);
 }
 
 void	game_init(t_game *game, char **argv)

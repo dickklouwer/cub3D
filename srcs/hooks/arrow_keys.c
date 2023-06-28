@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 10:42:55 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/22 16:23:14 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/28 11:58:51 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void move(t_game *game, double new_px, double new_py)
 	int grid_x;
 	int grid_y;
 
-	grid_x = new_px / TILE_SIZE;
-	grid_y = new_py / TILE_SIZE;
+	grid_x = new_px / game->config.tile_size;
+	grid_y = new_py / game->config.tile_size;
 	if (game->map.map[grid_y][grid_x] != '1')
 	{
 		game->map.update_screen = true;
