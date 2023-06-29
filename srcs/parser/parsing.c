@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:56:30 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/23 16:10:41 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/29 17:07:52 by dickklouwer   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,25 @@ int	flood_fill(int x, int y, t_map *map, char **map_line)
 	return (0);
 }
 
-int check_duplicates(t_config* config) 
+
+int	check_dups(t_config *config)
 {
-	if(ft_strncmp(config->north_texture, config->south_texture, 100) == 0)
-		return 1;
-	else if(ft_strncmp(config->north_texture, config->west_texture, 100) == 0)
-		return 1;
-	else if(ft_strncmp(config->north_texture, config->east_texture, 100) == 0)
-		return 1;
-	else if(ft_strncmp(config->south_texture, config->west_texture, 100) == 0)
-		return 1;
-	else if(ft_strncmp(config->south_texture, config->east_texture, 100) == 0)
-		return 1;
-	else if(ft_strncmp(config->west_texture, config->east_texture, 100) == 0)
-		return 1;
-	else if(config->floor_color[0] == config->ceiling_color[0] && 
+	if (config->floor_color[0] == config->ceiling_color[0] && 
 	   config->floor_color[1] == config->ceiling_color[1] && 
 	   config->floor_color[2] == config->ceiling_color[2])
-		return 1;
-	return 0;
+		return (1);
+	else if (config->floor_color[0] == -1 || config->ceiling_color[0] == -1)
+		return (1);
+	return (0);
 }
-
 
 int	validate_variables(t_game *game)
 {
-	printf("%s\n", game->config.east_texture);
-	printf("%s\n", game->config.west_texture);
-	printf("%s\n", game->config.north_texture);
-	printf("%s\n", game->config.south_texture);
+	if (check_dups(&game->config))
+		return (err_exit("cub3D: Duplicate Colors..."));
 	if (!game->config.east_texture || !game->map.map || !game->config.north_texture ||
 		!game->config.south_texture || !game->config.west_texture)
 		return (err_exit("cub3D: Information in Config file not parseable."));
-	if (check_duplicates(&game->config))
-		return (err_exit("cub3D: Duplicate Textures found.."));
 }
 
 int	parse_game(t_game *game)
@@ -75,7 +61,7 @@ int	parse_game(t_game *game)
 	parse_config(&game->config, game);
 	parse_map(&game->map, &game->player);
 	init_player(&game->player);
-	flood_fill(game->player.sx, game->player.sy, &game->map, game->map.map_cpy);
 	validate_variables(game);
+	flood_fill(game->player.sx, game->player.sy, &game->map, game->map.map_cpy);
 	return (EXIT_SUCCESS);
 }

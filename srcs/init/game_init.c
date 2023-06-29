@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:32:10 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/23 16:16:11 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/06/29 16:37:41 by dickklouwer   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static void	config_init(t_config *config, char **argv)
 	config->south_texture = NULL;
 	config->west_texture = NULL;
 	config->east_texture = NULL;
-	config->floor_color[0] = 0;
-	config->floor_color[1] = 0;
-	config->floor_color[2] = 0;
-	config->ceiling_color[0] = 0;
-	config->ceiling_color[1] = 0;
-	config->ceiling_color[2] = 0;
+	config->floor_color[0] = -1;
+	config->floor_color[1] = -1;
+	config->floor_color[2] = -1;
+	config->ceiling_color[0] = -1;
+	config->ceiling_color[1] = -1;
+	config->ceiling_color[2] = -1;
 	config->map = NULL;
 	config->map_y = 0;
 	config->map_x = 0;
@@ -53,6 +53,7 @@ static void	map_init(t_map *map, char **argv)
 
 void	init_player(t_player *player)
 {
+	player->player_count = 0;
 	player->px = (player->sx * TILE_SIZE) - (TILE_SIZE / 2) + (PLAYER_SIZE / 2);
 	player->py = (player->sy * TILE_SIZE) - (TILE_SIZE / 2) + (PLAYER_SIZE / 2);
 	if (player->orientation == 'N')
@@ -75,5 +76,6 @@ void	game_init(t_game *game, char **argv)
 	if (!game->ray)
 		perror("Failed to allocate memory..");
 	map_init(&game->map, argv);
+	init_player(&game->player);
 	config_init(&game->config, argv);
 }
