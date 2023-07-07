@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/23 11:56:42 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/23 15:57:50 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/29 15:27:40 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void calculate_player(t_game *game, t_ray *rays, int px, int py)
 	calculate_raycast(game, rays, px, py);
 }
 
-void    draw_player(t_game *game, t_ray *rays, int px, int py)
+void	draw_player(t_game *game, t_ray *rays, int px, int py)
 {
-    int x;
+	int x;
 	int y;
 
 	x = 0;

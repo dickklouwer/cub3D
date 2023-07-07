@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:32:10 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/28 13:16:51 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/06/29 15:19:24 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	config_init(t_config *config, char **argv)
 	config->map_x = 0;
 	config->tile_size = 32;
 	config->fov = 60;
-	config->num_rays = 1200;
+	config->num_rays = 120;
 	config->angle_step = (double)config->fov / (double)config->num_rays;
 }
 
