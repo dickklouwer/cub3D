@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:32:10 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/29 15:19:24 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/07/07 11:44:55 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	config_init(t_config *config, char **argv)
 	config->fov = 60;
 	config->num_rays = 120;
 	config->angle_step = (double)config->fov / (double)config->num_rays;
+	config->move_speed = 1;
+	config->rotate_speed = 3;
 }
 
 static void	map_init(t_map *map, char **argv)

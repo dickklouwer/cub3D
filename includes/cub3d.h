@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/28 11:55:56 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/07/07 11:44:39 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ typedef struct	s_config {
 	int		fov;
 	int		num_rays;
 	double	angle_step;
+	double	move_speed;
+	double	rotate_speed;
 }				t_config;
 
 typedef struct  s_ray
