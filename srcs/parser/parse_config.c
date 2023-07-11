@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:34:14 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/29 17:06:21 by dickklouwer   ########   odam.nl         */
+/*   Updated: 2023/07/11 10:05:02 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ int check_dup_config_vars(t_config *config, char **line)
 
 void	set_config_variables(t_config *config, char **line)
 {
-	if (ft_strncmp("N", *line, 2) == 0)
+	if (ft_strncmp("N", *line, 1) == 0)
 		config->north_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("S", *line, 2) == 0)
+	else if (ft_strncmp("S", *line, 1) == 0)
 		config->south_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("W", *line, 2) == 0)
+	else if (ft_strncmp("W", *line, 1) == 0)
 		config->west_texture = ft_strdup(line[1]);
-	else if (ft_strncmp("E", *line, 2) == 0)
+	else if (ft_strncmp("E", *line, 1) == 0)
 		config->east_texture = ft_strdup(line[1]);
 	else if (ft_strncmp("F ", *line, 1) == 0)
 		parse_color(config->floor_color, line[1]);

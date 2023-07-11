@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:56:30 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/11 10:02:10 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/07/11 10:05:16 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	validate_variables(t_game *game)
 {
 	if (check_dups(&game->config))
 		return (err_exit("cub3D: Duplicate Colors..."));
-	// if (!game->config.east_texture || !game->map.map || !game->config.north_texture ||
-	// 	!game->config.south_texture || !game->config.west_texture)
-	// 	return (err_exit("cub3D: Information in Config file not parseable."));
+	if (!game->config.east_texture || !game->map.map || !game->config.north_texture ||
+		!game->config.south_texture || !game->config.west_texture)
+		return (err_exit("cub3D: Information in Config file not parseable."));
 }
 
 int	parse_game(t_game *game)
