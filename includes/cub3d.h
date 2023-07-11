@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/07 11:44:39 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/07/11 09:58:10 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ typedef struct	s_player {
 	int		player_count;
 	char	orientation;
 }				t_player;
+
+typedef struct	s_vars {
+	int		n_text;
+	int		s_text;
+	int		w_text;
+	int		e_text;
+	int		f_color;
+	int		c_color;
+	int		map_found;
+}				t_vars;
 
 typedef struct	s_config {
 	char	*map_path;
@@ -154,5 +164,7 @@ void calculate_raycast(t_game *game, t_ray *rays, int px, int py);
 void draw_raycast(t_game *game, t_ray *rays);
 void calculate_player(t_game *game, t_ray *rays, int px, int py);
 void    draw_player(t_game *game, t_ray *rays, int px, int py);
+
+int	check_dups(t_config *config);
 
 #endif

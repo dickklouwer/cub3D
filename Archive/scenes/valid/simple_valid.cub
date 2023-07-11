@@ -1,0 +1,21 @@
+N ./textures/diamond.png
+
+
+
+S ./textures/gold.png
+
+
+
+W ./textures/stone.png
+
+
+E ./textures/wood.png
+
+F 0,0,255
+C 255,0,0
+
+111111
+1S0101
+101001
+100001
+111111

@@ -6,18 +6,18 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:32:10 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/07 11:44:55 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/07/11 10:00:18 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	st_file_check(char *file)
+int st_file_check(char *file)
 {
-	const char	*filename;
+	char *filename;
 
 	filename = ft_strnstr(file, ".", ft_strlen(file) + 1);
-	if (!filename || ft_strncmp(filename, ".cub", ft_strlen(filename)))
+	if (!filename || ft_strncmp(filename, ".cub", 4) || ft_strlen(filename) != 4)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -29,12 +29,12 @@ static void	config_init(t_config *config, char **argv)
 	config->south_texture = NULL;
 	config->west_texture = NULL;
 	config->east_texture = NULL;
-	config->floor_color[0] = 0;
-	config->floor_color[1] = 0;
-	config->floor_color[2] = 0;
-	config->ceiling_color[0] = 0;
-	config->ceiling_color[1] = 0;
-	config->ceiling_color[2] = 0;
+	config->floor_color[0] = -1;
+	config->floor_color[1] = -1;
+	config->floor_color[2] = -1;
+	config->ceiling_color[0] = -1;
+	config->ceiling_color[1] = -1;
+	config->ceiling_color[2] = -1;
 	config->map = NULL;
 	config->map_y = 0;
 	config->map_x = 0;
@@ -59,6 +59,7 @@ static void	map_init(t_map *map, char **argv)
 
 void	init_player(t_game *game)
 {
+	game->player.player_count = 0;
 	game->player.px = (game->player.sx * game->config.tile_size) - (game->config.tile_size / 2) + (PLAYER_SIZE / 2);
 	game->player.py = (game->player.sy * game->config.tile_size) - (game->config.tile_size / 2) + (PLAYER_SIZE / 2);
 	if (game->player.orientation == 'N')
@@ -75,11 +76,12 @@ void	init_player(t_game *game)
 
 void	game_init(t_game *game, char **argv)
 {
+	if (st_file_check(argv[1]))
+		err_exit("Wrong config file extension");
 	game->ray = malloc(sizeof(t_ray));
 	if (!game->ray)
 		perror("Failed to allocate memory..");
-	if (st_file_check(argv[1]))
-		err_exit("Wrong config file extension");
 	map_init(&game->map, argv);
+	init_player(game);
 	config_init(&game->config, argv);
 }
