@@ -64,10 +64,3 @@ int	main(int argc, char **argv)
 	free(game.ray);
 	return (EXIT_SUCCESS);
 }
-
-// Running cub3D with Archive/scenes/invalid/two_players.cub
-// Running cub3D with Archive/scenes/invalid/missing_one_color.cub
-// Running cub3D with Archive/scenes/invalid/invalid_texture_path.cub
-// Running cub3D with Archive/scenes/invalid/invalid_texture_path.cub
-// Running cub3D with Archive/scenes/invalid/duplicate_texture.cub
-// Running cub3D with Archive/scenes/invalid/duplicate_color.cub
