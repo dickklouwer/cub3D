@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:56:30 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/11 10:05:16 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/07/12 18:53:20 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	validate_variables(t_game *game)
 	if (!game->config.east_texture || !game->map.map || !game->config.north_texture ||
 		!game->config.south_texture || !game->config.west_texture)
 		return (err_exit("cub3D: Information in Config file not parseable."));
+	return (EXIT_SUCCESS);
 }
 
 int	parse_game(t_game *game)
