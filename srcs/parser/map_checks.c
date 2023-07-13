@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/07 11:47:25 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/13 08:07:26 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/07/13 08:17:26 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	map_prerequisites(t_player *player, char *line, int y)
 			if (line[i] == 'W' || line[i] == 'E'
 				|| line[i] == 'S' || line[i] == 'N')
 			{
-				player->sx = i;
-				player->sy = y;
+				player->sx = i + 1;
+				player->sy = y + 1;
 				player->orientation = line[i];
 				player->player_count++;
 			}

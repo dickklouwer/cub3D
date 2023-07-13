@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:32:10 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/11 10:00:18 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/07/13 08:20:12 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ void	init_player(t_game *game)
 	game->player.py = (game->player.sy * game->config.tile_size) - (game->config.tile_size / 2) + (PLAYER_SIZE / 2);
 	if (game->player.orientation == 'N')
 		game->player.pa = 270;
+	else if (game->player.orientation == 'E')
+		game->player.pa = 0;
 	else if (game->player.orientation == 'S')
 		game->player.pa = 90;
-	else if (game->player.orientation == 'E')
-		game->player.pa = 180;
 	else if (game->player.orientation == 'W')
-		game->player.pa = 0;
+		game->player.pa = 180;
 	game->player.pdx = cos(game->player.pa / 180 * M_PI);
 	game->player.pdy = sin(game->player.pa / 180 * M_PI);
 }
