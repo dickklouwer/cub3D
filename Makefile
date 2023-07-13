@@ -17,6 +17,7 @@ SRCS :=	main.c \
 		screen/raycasting.c \
 		screen/draw_player.c \
 		hooks/arrow_keys.c \
+		screen/textures.c
 
 SRCSDIR = srcs
 OBJDIR = obj

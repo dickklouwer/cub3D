@@ -41,9 +41,8 @@ void	calculate_raycast(t_game *game, t_ray *rays, int px, int py)
 				if (game->map.map[ray->py / game->config.tile_size][ray->px / game->config.tile_size] == '1')
 					break;
 			}
-			ray->length += 1;
+			ray->length += .01;
 		}
-		// printf("ray->length: %f\n", ray->length);
 		ray->angle = (ray->angle * (180 / M_PI)) - game->player.pa;
 		ray_index++;
 		i++;
@@ -61,7 +60,7 @@ void	draw_raycast(t_game *game, t_ray *rays)
 		ray = &rays[i];
 		// if (game->map.show_minimap)
 			// mlx_put_pixel(game->img, ray->px, ray->py, 0xFFFF00FF);
-		draw_wals(game, ray);
+		draw_walls(game, ray);
 		i++;
 	}
 }

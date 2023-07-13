@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/11 09:58:10 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/07/13 13:53:25 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	init_screen(mlx_t **mlx);
 void	draw_screen(t_game *game);
 void	update_screen(t_game *game);
 void	draw_floor_and_cailing(t_game *game);
-void	draw_wals(t_game *game, t_ray *ray);
+void	draw_walls(t_game *game, t_ray *ray);
 // void	draw_walls(t_game *game, float distance, double angle);
 // void	draw_3d_walls(mlx_image_t *image, t_ray *rays, uint32_t wall_color, uint32_t background_color);
 
@@ -167,4 +167,6 @@ void    draw_player(t_game *game, t_ray *rays, int px, int py);
 
 int	check_dups(t_config *config);
 
+
+int     print_textures(t_game *game);
 #endif
