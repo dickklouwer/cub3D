@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/11 09:58:10 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/07/13 08:58:14 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@
 // #define NUM_RAYS 120
 #define MAX_RAY_LENGTH 10000
 #define WALL_HEIGHT_FACTOR 1.5
+
+# define NC			"\033[0m"
+# define RED		"\033[38;5;1m"
+# define GREEN		"\033[38;5;2m"
+# define YELLOW		"\033[38;5;3m"
+# define BLUE		"\033[38;5;4m"
+# define MAGENTA	"\033[38;5;5m"
+# define CYAN		"\033[38;5;6m"
+# define WHITE		"\033[38;5;7m"
+# define GRAY		"\033[38;5;8m"
 
 # include <math.h>
 # include <stdlib.h>

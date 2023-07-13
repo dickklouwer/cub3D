@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/22 11:55:57 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/07/11 10:04:16 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/07/13 11:19:51 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ void	draw_wals(t_game *game, t_ray *ray)
 	int	y_end;
 	int	wall_height;
 
-	ray->length *= cos(ray->angle * (M_PI / 180));
+	ray->length *= cos(ray->angle * M_PI / 180);
 	wall_height = (game->config.tile_size / ray->length) * ((GAME_WIDTH / 2) / tan((game->config.fov / 2) * (M_PI / 180)));
+	// wall_height = game->config.tile_size / ray->length * 1000;
 	x_start = (ray->angle + (game->config.fov / 2)) * (GAME_WIDTH / game->config.fov);
 	x_end = x_start + (GAME_WIDTH / game->config.num_rays);
-	// printf("ray->angle: %f\n", ray->angle);
-	// printf("x_start: %d\n", x_start);
-	// printf("x_end: %d\n", x_end);
-	// printf("wall_height: %d\n", wall_height);
+	// printf(WHITE"=-=-=-=-=-Draw-=-=-=-=-=\n"NC);
+	// printf(GREEN"ray->angle: %f\n"NC, ray->angle);
+	// printf(YELLOW"ray->length: %f\n"NC, ray->length);
+	// printf(BLUE"x_start: %d\n"NC, x_start);
+	// printf(MAGENTA"x_end: %d\n"NC, x_end);
+	// printf(CYAN"wall_height: %d\n"NC, wall_height);
 	x = x_start;
 	while (x <= x_end)
 	{

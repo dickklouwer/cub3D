@@ -25,8 +25,6 @@ void	calculate_raycast(t_game *game, t_ray *rays, int px, int py)
 	{
 		t_ray *ray = &rays[i];
 		ray->angle = (game->player.pa + ray_index * game->config.angle_step) * (M_PI/180);
-		// printf("ray->angle: %f\n", (ray->angle * (180 / M_PI)) - game->player.pa);
-		// printf("angle_step: %f\n", game->config.angle_step);
 		ray->dx = cos(ray->angle);
 		ray->dy = sin(ray->angle);
 		ray->length = 0;
@@ -41,10 +39,13 @@ void	calculate_raycast(t_game *game, t_ray *rays, int px, int py)
 				if (game->map.map[ray->py / game->config.tile_size][ray->px / game->config.tile_size] == '1')
 					break;
 			}
-			ray->length += 1;
+			ray->length += .005;
 		}
-		// printf("ray->length: %f\n", ray->length);
 		ray->angle = (ray->angle * (180 / M_PI)) - game->player.pa;
+		// printf(WHITE"=-=-=-=-Calculate-=-=-=\n"NC);
+		// printf(GRAY"player.pa: %f\n"NC, game->player.pa);
+		// printf(GREEN"ray->angle: %f\n"NC, ray->angle);
+		// printf(YELLOW"ray->length: %f\n"NC, ray->length);
 		ray_index++;
 		i++;
 	}
@@ -53,15 +54,15 @@ void	calculate_raycast(t_game *game, t_ray *rays, int px, int py)
 void	draw_raycast(t_game *game, t_ray *rays)
 {
 	t_ray *ray;
-	int i;
+	int ray_index;
 
-	i = 0;
-	while (i <= game->config.num_rays)
+	ray_index = 0;
+	while (ray_index <= game->config.num_rays)
 	{
-		ray = &rays[i];
-		// if (game->map.show_minimap)
-			// mlx_put_pixel(game->img, ray->px, ray->py, 0xFFFF00FF);
+		ray = &rays[ray_index];
+		if (game->map.show_minimap)
+			mlx_put_pixel(game->img, ray->px, ray->py, 0x00FF00FF);
 		draw_wals(game, ray);
-		i++;
+		ray_index++;
 	}
 }
