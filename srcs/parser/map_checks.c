@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/07 11:47:25 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/29 16:58:32 by dickklouwer   ########   odam.nl         */
+/*   Updated: 2023/07/13 08:07:26 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	map_prerequisites(t_player *player, char *line, int y)
 				player->player_count++;
 			}
 			else if (line[i] == ' ')
-				break ;
+				i++;
 			else
 				err_exit("Given map not parseable");
 		}
