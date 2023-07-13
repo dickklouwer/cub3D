@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:34:14 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/11 10:05:02 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/07/13 08:05:18 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	prep_map_data(t_map *map, t_player *player)
 	free(temp);
 	close(map->map_fd);
 	if (player->player_count != 1)
-		err_exit("More players than allowed.. ");
+		err_exit("cub3D: More or less than 1 player ... ");
 }
 
 int	check_map_start(t_game *game, char *line)
