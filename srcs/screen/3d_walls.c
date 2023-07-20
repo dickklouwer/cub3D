@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/22 11:55:57 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/07/13 11:19:51 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/07/20 13:46:09 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	draw_wals(t_game *game, t_ray *ray)
 	int	y_end;
 	int	wall_height;
 
-	ray->length *= cos(ray->angle * M_PI / 180);
+	// ray->length *= cos((ray->angle - 0) * M_PI / 180);
+	ray->length *= cos((ray->angle - 0) * M_PI / 180);
 	wall_height = (game->config.tile_size / ray->length) * ((GAME_WIDTH / 2) / tan((game->config.fov / 2) * (M_PI / 180)));
 	// wall_height = game->config.tile_size / ray->length * 1000;
 	x_start = (ray->angle + (game->config.fov / 2)) * (GAME_WIDTH / game->config.fov);

@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/13 08:58:14 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/07/18 16:52:48 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,15 @@ typedef struct	s_config {
 	double	rotate_speed;
 }				t_config;
 
-typedef struct  s_ray
+typedef struct	s_ray
 {
-    double angle;
-    double dx;
-    double dy;
-    int    px;
-    int    py;
-    double length;
-}               t_ray;
+	double	angle;
+	double	dx;
+	double	dy;
+	int		px;
+	int		py;
+	double	length;
+}				t_ray;
 
 typedef struct s_game
 {

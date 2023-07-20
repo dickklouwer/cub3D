@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/06/28 11:56:36 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/07/20 14:21:29 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,15 @@ void draw_borders(t_game *game)
 
 void	draw_game(t_game *game)
 {
-    t_ray *rays;
-    const int px = game->player.px;
+	t_ray *rays;
+	const int px = game->player.px;
 	const int py = game->player.py;
 
-    rays = (t_ray *)ft_calloc(sizeof(t_ray),  game->config.num_rays + 1);
+	rays = (t_ray *)ft_calloc(sizeof(t_ray),  game->config.num_rays + 1);
 	if (!rays)
 		perror("Failed to allocate memory");
 	draw_borders(game);
-	calculate_player(game, rays, px, py);
-    draw_player(game, rays, px, py);
-    free(rays);
+	calculate_raycast(game, rays, px, py);
+	draw_player(game, rays, px, py);
+	free(rays);
 }
