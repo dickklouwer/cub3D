@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/18 16:52:48 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/02 21:05:40 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #define GAME_HEIGTH 1200
 #define MINIMAP_WIDHT 1200
 #define MINIMAP_HEIGHT 1200
-#define PLAYER_SIZE 4
+#define PLAYER_SIZE 5
 // #define TILE_SIZE 32
 #define RAD 0.0174533
 // #define FOV 60
@@ -112,6 +112,12 @@ typedef struct	s_ray
 	double	dy;
 	int		px;
 	int		py;
+	int		rx;
+	int		ry;
+	int		xo;
+	int		yo;
+	int		mx;
+	int		my;
 	double	length;
 }				t_ray;
 

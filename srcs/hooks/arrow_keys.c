@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 10:42:55 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/07/18 17:01:36 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/02 17:13:01 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void key_up(t_game *game)
 	double new_px;
 	double new_py;
 
-	new_px = game->player.px + game->config.move_speed * cos(game->player.pa * M_PI / 180);
-	new_py = game->player.py + game->config.move_speed * sin(game->player.pa * M_PI / 180);
+	new_px = game->player.px + (game->config.move_speed * cos(game->player.pa * M_PI / 180));
+	new_py = game->player.py + (game->config.move_speed * sin(game->player.pa * M_PI / 180));
 	move(game, new_px, new_py);
 }
 
@@ -45,8 +45,8 @@ static void key_down(t_game *game)
 	double new_px;
 	double new_py;
 
-	new_px = game->player.px - game->config.move_speed * cos(game->player.pa * M_PI / 180);
-	new_py = game->player.py - game->config.move_speed * sin(game->player.pa * M_PI / 180);
+	new_px = game->player.px - (game->config.move_speed * cos(game->player.pa * M_PI / 180));
+	new_py = game->player.py - (game->config.move_speed * sin(game->player.pa * M_PI / 180));
 	move(game, new_px, new_py);
 }
 
@@ -55,8 +55,8 @@ static void key_left(t_game *game)
 	double new_px;
 	double new_py;
 
-	new_px = game->player.px - game->config.move_speed * cos((game->player.pa + 90) * M_PI / 180);
-	new_py = game->player.py - game->config.move_speed * sin((game->player.pa + 90) * M_PI / 180);
+	new_px = game->player.px - (game->config.move_speed * cos((game->player.pa + 90) * M_PI / 180));
+	new_py = game->player.py - (game->config.move_speed * sin((game->player.pa + 90) * M_PI / 180));
 	move(game, new_px, new_py);
 }
 
@@ -65,8 +65,8 @@ static void key_right(t_game *game)
 	double new_px;
 	double new_py;
 
-	new_px = game->player.px + game->config.move_speed * cos((game->player.pa + 90) * M_PI / 180);
-	new_py = game->player.py + game->config.move_speed * sin((game->player.pa + 90) * M_PI / 180);
+	new_px = game->player.px + (game->config.move_speed * cos((game->player.pa + 90) * M_PI / 180));
+	new_py = game->player.py + (game->config.move_speed * sin((game->player.pa + 90) * M_PI / 180));
 	move(game, new_px, new_py);
 }
 

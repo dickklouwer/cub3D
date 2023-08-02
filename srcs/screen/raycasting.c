@@ -88,7 +88,7 @@ void	draw_raycast(t_game *game, t_ray *rays)
 	int		ray_index;
 
 	ray_index = 0;
-	while (ray_index <= game->config.num_rays)
+	while (ray_index <= game->config.num_rays) 
 	{
 		ray = &rays[ray_index];
 		if (game->map.show_minimap)
