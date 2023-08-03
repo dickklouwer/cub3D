@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/03 16:53:20 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/03 19:10:12 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,47 @@ int	round_tail_up(int num)
 	return ((((int)num>>5)<<5) + 32);
 }
 
+void	draw_line(t_game *game, int x1, int y1, int x2, int y2, int color)
+{
+	int dx;
+	int dy;
+	int steps;
+	int x;
+	int y;
+
+	dx = x2 - x1;
+	dy = y2 - y1;
+	steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+	x = x1;
+	y = y1;
+	dx /= steps;
+	dy /= steps;
+	while (steps--)
+	{
+		mlx_put_pixel(game->img, x, y, color);
+		x += dx;
+		y += dy;
+	}
+}
+
+void	draw_square(t_game *game, int x, int y, int size, int color)
+{
+	int dx;
+	int dy;
+
+	dx = 0;
+	while (dx < size)
+	{
+		dy = 0;
+		while (dy < size)
+		{
+			mlx_put_pixel(game->img, x + dx, y + dy, color);
+			dy++;
+		}
+		dx++;
+	}
+}
+
 double	distance(double x1, double y1, double x2, double y2)
 {
 	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
@@ -105,10 +146,6 @@ void	calculate_rays(t_game *game)
 		/* Horizontal */
 		aTan = -1 / tan(game->ray->angle * M_PI / 180);
 		dof = 0;
-		game->ray->ry = 0;
-		game->ray->rx = 0;
-		game->ray->xo = 0;
-		game->ray->yo = 0;
 		if (game->ray->angle > 180)
 		{
 			game->ray->ry = round_tail_down(game->player.py);
@@ -124,19 +161,19 @@ void	calculate_rays(t_game *game)
 			game->ray->xo = -game->ray->yo * aTan;
 		}
 		else if (game->ray->angle == 0 || game->ray->angle == 180)
-			dof = 100;
-		while (dof < 100)
+			dof = 8;
+		while (dof < 8)
 		{
 			game->ray->mx = (int)(game->ray->rx)>>5;
 			game->ray->my = (int)(game->ray->ry)>>5;
 			if (game->ray->mx < 0 || game->ray->mx >= game->map.width || game->ray->my < 0 || game->ray->my >= game->map.height)
-				dof = 100;
+				dof = 8;
 			else if (game->map.map[game->ray->my][game->ray->mx] == '1')
 			{
 				game->ray->hx = game->ray->rx;
 				game->ray->hy = game->ray->ry;
 				game->ray->dis_h = distance(game->player.px, game->player.py, game->ray->rx, game->ray->ry);
-				dof = 100;
+				dof = 8;
 			}
 			else
 			{
@@ -151,10 +188,6 @@ void	calculate_rays(t_game *game)
 		/* Vertical */
 		nTan = -tan(game->ray->angle * M_PI / 180);
 		dof = 0;
-		game->ray->ry = 0;
-		game->ray->rx = 0;
-		game->ray->xo = 0;
-		game->ray->yo = 0;
 		if (game->ray->angle < 90 || game->ray->angle > 270)
 		{
 			game->ray->rx = round_tail_up(game->player.px);
@@ -170,19 +203,19 @@ void	calculate_rays(t_game *game)
 			game->ray->yo = -game->ray->xo * nTan;
 		}
 		else if (game->ray->angle == 90 || game->ray->angle == 270)
-			dof = 100;
-		while (dof < 100)
+			dof = 8;
+		while (dof < 8)
 		{
 			game->ray->mx = (int)(game->ray->rx)>>5;
 			game->ray->my = (int)(game->ray->ry)>>5;
 			if (game->ray->mx < 0 || game->ray->mx >= game->map.width || game->ray->my < 0 || game->ray->my >= game->map.height)
-				dof = 100;
+				dof = 8;
 			else if (game->map.map[game->ray->my][game->ray->mx] == '1')
 			{
 				game->ray->vx = game->ray->rx;
 				game->ray->vy = game->ray->ry;
 				game->ray->dis_v = distance(game->player.px, game->player.py, game->ray->rx, game->ray->ry);
-				dof = 100;
+				dof = 8;
 			}
 			else
 			{
@@ -194,7 +227,7 @@ void	calculate_rays(t_game *game)
 		}
 		game->ray->hit_h = -1;
 		game->ray->hit_v = -1;
-		if (game->ray->dis_h <= game->ray->dis_v)
+		if (game->ray->dis_h < game->ray->dis_v)
 		{
 			game->ray->hit_h = game->ray->hx;
 			game->ray->hit_v = game->ray->hy;
