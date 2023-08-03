@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/08/02 21:05:40 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/03 16:26:35 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ typedef struct	s_ray
 	double	angle;
 	double	dx;
 	double	dy;
+	double	dis_h;
+	double	dis_v;
 	int		px;
 	int		py;
 	int		rx;
@@ -118,6 +120,12 @@ typedef struct	s_ray
 	int		yo;
 	int		mx;
 	int		my;
+	int		hx;
+	int		hy;
+	int		vx;
+	int		vy;
+	int		hit_h;
+	int		hit_v;
 	double	length;
 }				t_ray;
 
