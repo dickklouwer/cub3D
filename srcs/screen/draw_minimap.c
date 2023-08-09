@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/03 19:10:12 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/09 14:42:25 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ void	calculate_rays(t_game *game)
 		dof = 0;
 		if (game->ray->angle < 90 || game->ray->angle > 270)
 		{
+			// printf("right\n");
 			game->ray->rx = round_tail_up(game->player.px);
 			game->ray->ry = (game->player.px - game->ray->rx) * nTan + game->player.py;
 			game->ray->xo = game->config.tile_size;
@@ -197,6 +198,7 @@ void	calculate_rays(t_game *game)
 		}
 		else if (game->ray->angle > 90 && game->ray->angle < 270)
 		{
+			// printf("left\n");
 			game->ray->rx = round_tail_down(game->player.px);
 			game->ray->ry = (game->player.px - game->ray->rx) * nTan + game->player.py;
 			game->ray->xo = -game->config.tile_size;
