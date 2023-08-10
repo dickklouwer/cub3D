@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:15:37 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/08/03 11:36:03 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/10 16:14:09 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,17 @@ void	map_init(t_map *map, char **argv)
 int	main(int argc, char **argv) 
 {
 	t_game	game;
-	
+
 	if (argc != 2)
 		err_exit("cub3D: 2 Arguments required\n");
 	game_init(&game, argv);
 	parse_game(&game);
 	init_screen(&game.mlx);
-	printf("map hight: %d\n", game.map.height);
-	printf("map width: %d\n", game.map.width);
+	init_test(&game);
 	draw_screen(&game);
 	// temp_test_draw_walls(&game);
-	mlx_loop_hook(game.mlx, ft_hook, &game);
+	// mlx_loop_hook(game.mlx, ft_hook, &game);
+	mlx_loop_hook(game.mlx, test_hook, &game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	free(game.ray);

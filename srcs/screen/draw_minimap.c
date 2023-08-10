@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 11:41:06 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/09 14:42:25 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/09 16:09:56 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void	calculate_rays(t_game *game)
 		// printf("ray angle: %f\n\n", game->ray->angle);
 		/* Horizontal */
 		aTan = -1 / tan(game->ray->angle * M_PI / 180);
+		// printf("aTan %f\n", nTan);
 		dof = 0;
 		if (game->ray->angle > 180)
 		{
@@ -199,6 +200,7 @@ void	calculate_rays(t_game *game)
 		else if (game->ray->angle > 90 && game->ray->angle < 270)
 		{
 			// printf("left\n");
+			
 			game->ray->rx = round_tail_down(game->player.px);
 			game->ray->ry = (game->player.px - game->ray->rx) * nTan + game->player.py;
 			game->ray->xo = -game->config.tile_size;

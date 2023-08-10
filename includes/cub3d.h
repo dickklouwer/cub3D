@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/08/03 16:26:35 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/10 17:00:34 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,38 @@ typedef struct	s_player {
 	char	orientation;
 }				t_player;
 
+typedef struct	s_new_player {
+	double	pos_x;
+	double	pos_y;
+	int		map_x;
+	int		map_y;
+	double	dir_x;
+	double	old_dir_x;
+	double	old_dir_y;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	old_plane_x;
+	double	old_plane_y;
+	double	time;
+	double	old_time;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wal_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		line_start_y;
+	int		line_stop_y;
+}				t_new_player;
+
 typedef struct	s_vars {
 	int		n_text;
 	int		s_text;
@@ -140,6 +172,7 @@ typedef struct s_game
 	mlx_image_t			*minimap;
 	mlx_key_data_t		*key_data;
 	t_player			player;
+	t_new_player		p;
 }				t_game;
 
 // MAIN
@@ -183,6 +216,7 @@ void	draw_game(t_game *game);
 
 // HOOKS
 void	ft_hook(void *para);
+void	test_hook(void *param);
 
 void calculate_raycast(t_game *game, t_ray *rays, int px, int py);
 void draw_raycast(t_game *game, t_ray *rays);
@@ -190,5 +224,8 @@ void calculate_player(t_game *game, t_ray *rays, int px, int py);
 void    draw_player(t_game *game, t_ray *rays, int px, int py);
 
 int	check_dups(t_config *config);
+
+void	init_test(t_game *game);
+void	test(t_game *game);
 
 #endif
