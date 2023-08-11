@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/08/10 17:00:34 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/11 15:06:52 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #define GAME_WIDTH 1200
 #define GAME_HEIGTH 1200
+#define texWidth 64
+#define texHeight 64
 #define MINIMAP_WIDHT 1200
 #define MINIMAP_HEIGHT 1200
 #define PLAYER_SIZE 5
@@ -106,6 +108,9 @@ typedef struct	s_new_player {
 	int		line_height;
 	int		line_start_y;
 	int		line_stop_y;
+	int		tex_num;
+	double	wall_x;
+	int		tex_x;
 }				t_new_player;
 
 typedef struct	s_vars {

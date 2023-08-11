@@ -6,28 +6,16 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 14:45:02 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/10 20:22:39 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/11 15:30:47 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int worldMap[8][8]=
-{
-  {1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,2,1},
-};
-
 void	init_test(t_game *game)
 {
-	game->p.pos_x = 4;
-	game->p.pos_y = 4;
+	game->p.pos_x = game->player.sx - 0.5;
+	game->p.pos_y = game->player.sy - 0.5;
 	game->p.dir_x = -1.0;
 	game->p.dir_y = 0.0;
 	game->p.plane_x = 0;
@@ -115,9 +103,7 @@ void	digital_differential_analysis(t_game *game)
 			game->p.map_y += game->p.step_y;
 			game->p.side = 1;
 		}
-		// if (game->map.map[game->p.map_y][game->p.map_x] != '0')
-		// 	game->p.hit = 1;
-		if (worldMap[game->p.map_x][game->p.map_y] > 0)
+		if (game->map.map[game->p.map_y][game->p.map_x] == '1')
 			game->p.hit = 1;
 	}
 }
@@ -149,9 +135,15 @@ void	draw_vertical_line(t_game *game, int x)
 	while (y < game->p.line_stop_y)
 	{
 		if (game->p.side == 0)
-			mlx_put_pixel(game->img, x, y, 0xFFFFFFFF);
+			if (game->p.step_x > 0)
+				mlx_put_pixel(game->img, x, y, 0xFFFFFFFF);
+			else
+				mlx_put_pixel(game->img, x, y, 0xAAFFFFFF);
 		else
-			mlx_put_pixel(game->img, x, y, 0x0000FFFF);
+			if (game->p.step_y > 0)
+				mlx_put_pixel(game->img, x, y, 0x00AAFFFF);
+			else
+				mlx_put_pixel(game->img, x, y, 0x0000FFFF);
 		y++;
 	}
 }
@@ -161,34 +153,44 @@ void test_hook(void *param)
 	t_game *game;
 	double	move_speed;
 	double	rotate_speed;
+	double	space;
 
 	move_speed = 0.1;
-	rotate_speed = 0.05;
+	rotate_speed = 0.07;
+	space = 3.0;
 	game = param;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		if (worldMap[(int)(game->p.pos_x + game->p.dir_x * move_speed)][(int)game->p.pos_y] == false)
+		if (game->map.map[(int)game->p.pos_y][(int)(game->p.pos_x + game->p.dir_x * move_speed * space)] != '1')
 			game->p.pos_x += (game->p.dir_x * move_speed);
-		if (worldMap[(int)game->p.pos_x][(int)(game->p.pos_y + game->p.dir_y * move_speed)] == false)
+		if (game->map.map[(int)(game->p.pos_y + game->p.dir_y * move_speed * space)][(int)game->p.pos_x] != '1')
 			game->p.pos_y += (game->p.dir_y * move_speed);
 		game->map.update_screen = true;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
-		if (worldMap[(int)(game->p.pos_x - game->p.dir_x * move_speed)][(int)game->p.pos_y] == false)
+		if (game->map.map[(int)game->p.pos_y][(int)(game->p.pos_x - game->p.dir_x * move_speed * space)] != '1')
 			game->p.pos_x -= (game->p.dir_x * move_speed);
-		if (worldMap[(int)game->p.pos_x][(int)(game->p.pos_y - game->p.dir_y * move_speed)] == false)
+		if (game->map.map[(int)(game->p.pos_y - game->p.dir_y * move_speed * space)][(int)game->p.pos_x] != '1')
 			game->p.pos_y -= (game->p.dir_y * move_speed);
 		game->map.update_screen = true;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
+		if (game->map.map[(int)(game->p.pos_y + game->p.dir_x * move_speed * space)][(int)game->p.pos_x] != '1')
+			game->p.pos_y += (game->p.dir_x * move_speed);
+		if (game->map.map[(int)game->p.pos_y][(int)(game->p.pos_x - game->p.dir_y * move_speed * space)] != '1')
+			game->p.pos_x -= (game->p.dir_y * move_speed);
 		game->map.update_screen = true;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
+		if (game->map.map[(int)(game->p.pos_y - game->p.dir_x * move_speed * space)][(int)game->p.pos_x] != '1')
+			game->p.pos_y -= (game->p.dir_x * move_speed);
+		if (game->map.map[(int)game->p.pos_y][(int)(game->p.pos_x + game->p.dir_y * move_speed * space)] != '1')
+			game->p.pos_x += (game->p.dir_y * move_speed);
 		game->map.update_screen = true;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
@@ -222,16 +224,26 @@ void	test(t_game *game)
 	i = 0;
 	while (i < GAME_WIDTH)
 	{
-		// if (i != GAME_WIDTH / 2)
-		// {
-		// 	i++;
-		// 	continue;
-		// }
 		calculate_ray_position_and_direction(game, i);
 		calculate_step(game);
 		digital_differential_analysis(game);
 		calculate_distance(game);
 		calculate_vertical_line(game);
+		// Texture calculations
+		game->p.tex_num = game->map.map[game->p.map_y][game->p.map_x];
+		// Calculate value of wallX
+		if (game->p.side == 0)
+			game->p.wall_x = game->p.pos_x + game->p.perp_wal_dist * game->p.ray_dir_y;
+		else
+			game->p.wall_x = game->p.pos_x + game->p.perp_wal_dist * game->p.ray_dir_x;
+		game->p.wall_x -= floor(game->p.wall_x);
+		// X coordinate on the texture
+		game->p.tex_x = (int)(game->p.wall_x * (double)(texWidth));
+		if (game->p.side == 0 && game->p.ray_dir_x > 0)
+			game->p.tex_x = texWidth - game->p.tex_x - 1;
+		if (game->p.side == 1 && game->p.ray_dir_y < 0)
+			game->p.tex_x = texWidth - game->p.tex_x - 1;
+		// start from line 221 of file raycaster_textured.cpp
 		draw_vertical_line(game, i);
 		i++;
 	}
