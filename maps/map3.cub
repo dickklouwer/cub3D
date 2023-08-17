@@ -1,9 +1,9 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO walls/blue_tex.png
+SO walls/red_tex.png
+WE walls/green_tex.png
+EA walls/yellow_tex.png
 
-F 30,163,15
+F 30,103,15
 C 97,192,255
 
         1111111111111111111111111

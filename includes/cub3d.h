@@ -6,17 +6,17 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/08/11 15:06:52 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/17 16:29:52 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#define GAME_WIDTH 1200
-#define GAME_HEIGTH 1200
-#define texWidth 64
-#define texHeight 64
+#define GAME_WIDHT 1200
+#define GAME_HEIGHT 1200
+// #define texWidth 64
+// #define texHeight 64
 #define MINIMAP_WIDHT 1200
 #define MINIMAP_HEIGHT 1200
 #define PLAYER_SIZE 5
@@ -79,38 +79,47 @@ typedef struct	s_player {
 }				t_player;
 
 typedef struct	s_new_player {
-	double	pos_x;
-	double	pos_y;
-	int		map_x;
-	int		map_y;
-	double	dir_x;
-	double	old_dir_x;
-	double	old_dir_y;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	double	old_plane_x;
-	double	old_plane_y;
-	double	time;
-	double	old_time;
-	double	camera_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wal_dist;
-	int		step_x;
-	int		step_y;
-	int		hit;
-	int		side;
-	int		line_height;
-	int		line_start_y;
-	int		line_stop_y;
-	int		tex_num;
-	double	wall_x;
-	int		tex_x;
+	double			pos_x;
+	double			pos_y;
+	int				map_x;
+	int				map_y;
+	char			orientation;
+	int				pitch;
+	double			dir_x;
+	double			old_dir_x;
+	double			old_dir_y;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			old_plane_x;
+	double			old_plane_y;
+	double			camera_x;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			perp_wal_dist;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	int				line_height;
+	int				line_start_y;
+	int				line_stop_y;
+	int				tex_num;
+	double			wall_x;
+	int				tex_x;
+	double			step;
+	double			tex_pos;
+	int				tex_y;
+	mlx_texture_t	*texture;
+	mlx_texture_t	*texture_n;
+	mlx_texture_t	*texture_e;
+	mlx_texture_t	*texture_s;
+	mlx_texture_t	*texture_w;
+	int				color;
 }				t_new_player;
 
 typedef struct	s_vars {

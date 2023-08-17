@@ -6,28 +6,65 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 14:45:02 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/11 15:30:47 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/17 16:33:34 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+void	init_orientation(t_game *game)
+{
+	if (game->player.orientation == 'N')
+	{
+		game->p.dir_x = 0;
+		game->p.dir_y = -1;
+		game->p.plane_x = 0.66;
+		game->p.plane_y = 0;
+	}
+	if (game->player.orientation == 'S')
+	{
+		game->p.dir_x = 0;
+		game->p.dir_y = 1;
+		game->p.plane_x = -0.66;
+		game->p.plane_y = 0;
+	}
+	if (game->player.orientation == 'E')
+	{
+		game->p.dir_x = 1;
+		game->p.dir_y = 0;
+		game->p.plane_x = 0;
+		game->p.plane_y = 0.66;
+	}
+	if (game->player.orientation == 'W')
+	{
+		game->p.dir_x = -1;
+		game->p.dir_y = 0;
+		game->p.plane_x = 0;
+		game->p.plane_y = -0.66;
+	}
+}
+
+void	init_textures(t_game *game)
+{
+	game->p.texture_n = mlx_load_png(game->config.north_texture);
+	game->p.texture_s = mlx_load_png(game->config.south_texture);
+	game->p.texture_w = mlx_load_png(game->config.west_texture);
+	game->p.texture_e = mlx_load_png(game->config.east_texture);
+}
+
 void	init_test(t_game *game)
 {
 	game->p.pos_x = game->player.sx - 0.5;
 	game->p.pos_y = game->player.sy - 0.5;
-	game->p.dir_x = -1.0;
-	game->p.dir_y = 0.0;
-	game->p.plane_x = 0;
-	game->p.plane_y = 0.66;
-	game->p.time = 0;
-	game->p.old_time = 0;
-	printf("x:y "GREEN"%f"NC":"RED"%f\n"NC"", game->p.pos_x, game->p.pos_y);
+	game->p.orientation = game->player.orientation;
+	game->p.pitch = 100;
+	init_orientation(game);
+	init_textures(game);
 }
 
 void	calculate_ray_position_and_direction(t_game *game, int x)
 {
-	game->p.camera_x = (2 * x / (double)GAME_WIDTH) - 1;
+	game->p.camera_x = (2 * x / (double)GAME_WIDHT) - 1;
 	game->p.ray_dir_x = game->p.dir_x + (game->p.plane_x * game->p.camera_x);
 	game->p.ray_dir_y = game->p.dir_y + (game->p.plane_y * game->p.camera_x);
 }
@@ -118,13 +155,53 @@ void	calculate_distance(t_game *game)
 
 void	calculate_vertical_line(t_game *game)
 {
-	game->p.line_height = (int)(GAME_HEIGTH / game->p.perp_wal_dist);
-	game->p.line_start_y = (GAME_HEIGTH / 2) - (game->p.line_height / 2);
-	game->p.line_stop_y = (GAME_HEIGTH / 2) + (game->p.line_height / 2);
+	game->p.line_height = (int)(GAME_HEIGHT / game->p.perp_wal_dist);
+	game->p.line_start_y = (GAME_HEIGHT / 2) - (game->p.line_height / 2) + game->p.pitch;
+	game->p.line_stop_y = (GAME_HEIGHT / 2) + (game->p.line_height / 2) + game->p.pitch;
 	if (game->p.line_start_y < 0)
 		game->p.line_start_y = 0;
-	if (game->p.line_stop_y >= GAME_HEIGTH)
-		game->p.line_stop_y = GAME_HEIGTH - 1;
+	if (game->p.line_stop_y >= GAME_HEIGHT)
+		game->p.line_stop_y = GAME_HEIGHT - 1;
+}
+
+int	get_colour_from_pixel(u_int8_t *pixel)
+{
+	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
+}
+
+void	texture(t_game * game, int x)
+{
+	int	y;
+
+	// Texture calculations
+	game->p.tex_num = game->map.map[game->p.map_y][game->p.map_x] - 1;
+	if (game->p.side == 0)
+		if (game->p.step_x > 0)
+			game->p.texture = game->p.texture_e;
+		else
+			game->p.texture = game->p.texture_w;
+	else
+		if (game->p.step_y > 0)
+			game->p.texture = game->p.texture_s;
+		else
+			game->p.texture = game->p.texture_n;
+	// Calculate value of wallX
+	if (game->p.side == 0)
+		game->p.wall_x = game->p.pos_y + game->p.perp_wal_dist * game->p.ray_dir_y;
+	else
+		game->p.wall_x = game->p.pos_x + game->p.perp_wal_dist * game->p.ray_dir_x;
+	game->p.wall_x -= floor(game->p.wall_x);
+	// X coordinate on the texture
+	game->p.tex_x = (int)(game->p.wall_x * (double)(game->p.texture->width));
+	if (game->p.side == 0 && game->p.ray_dir_x > 0)
+		game->p.tex_x = game->p.texture->width - game->p.tex_x - 1;
+	if (game->p.side == 1 && game->p.ray_dir_y < 0)
+		game->p.tex_x = game->p.texture->width - game->p.tex_x - 1;
+	// Calculate step and initial value
+	game->p.step = 1.0 * game->p.texture->height / game->p.line_height;
+	// Starting texture coordinate
+	// game->p.tex_pos = (game->p.line_start_y - GAME_HEIGHT / 2 + game->p.line_height / 2) * game->p.step;
+	game->p.tex_pos = (game->p.line_start_y - game->p.pitch - GAME_HEIGHT / 2 + game->p.line_height / 2) * game->p.step;
 }
 
 void	draw_vertical_line(t_game *game, int x)
@@ -134,16 +211,12 @@ void	draw_vertical_line(t_game *game, int x)
 	y = game->p.line_start_y;
 	while (y < game->p.line_stop_y)
 	{
-		if (game->p.side == 0)
-			if (game->p.step_x > 0)
-				mlx_put_pixel(game->img, x, y, 0xFFFFFFFF);
-			else
-				mlx_put_pixel(game->img, x, y, 0xAAFFFFFF);
-		else
-			if (game->p.step_y > 0)
-				mlx_put_pixel(game->img, x, y, 0x00AAFFFF);
-			else
-				mlx_put_pixel(game->img, x, y, 0x0000FFFF);
+		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+		game->p.tex_y = (int)game->p.tex_pos & (game->p.texture->height - 1);
+		game->p.tex_pos += game->p.step;
+		// Get current color from the texture
+		game->p.color = get_colour_from_pixel(game->p.texture->pixels + (game->p.texture->height * game->p.tex_y + game->p.tex_x) * game->p.texture_n->bytes_per_pixel);
+		mlx_put_pixel(game->img, x, y, game->p.color);
 		y++;
 	}
 }
@@ -177,7 +250,7 @@ void test_hook(void *param)
 			game->p.pos_y -= (game->p.dir_y * move_speed);
 		game->map.update_screen = true;
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
 		if (game->map.map[(int)(game->p.pos_y + game->p.dir_x * move_speed * space)][(int)game->p.pos_x] != '1')
 			game->p.pos_y += (game->p.dir_x * move_speed);
@@ -185,7 +258,7 @@ void test_hook(void *param)
 			game->p.pos_x -= (game->p.dir_y * move_speed);
 		game->map.update_screen = true;
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
 		if (game->map.map[(int)(game->p.pos_y - game->p.dir_x * move_speed * space)][(int)game->p.pos_x] != '1')
 			game->p.pos_y -= (game->p.dir_x * move_speed);
@@ -193,7 +266,7 @@ void test_hook(void *param)
 			game->p.pos_x += (game->p.dir_y * move_speed);
 		game->map.update_screen = true;
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
 		game->p.old_dir_x = game->p.dir_x;
 		game->p.dir_x = (game->p.dir_x * cos(-rotate_speed)) - (game->p.dir_y * sin(-rotate_speed));
@@ -203,7 +276,7 @@ void test_hook(void *param)
 		game->p.plane_y = (game->p.old_plane_x * sin(-rotate_speed)) + (game->p.plane_y * cos(-rotate_speed));
 		game->map.update_screen = true;
 	}
-	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 	{
 		game->p.old_dir_x = game->p.dir_x;
 		game->p.dir_x = (game->p.dir_x * cos(rotate_speed)) - (game->p.dir_y * sin(rotate_speed));
@@ -219,32 +292,18 @@ void test_hook(void *param)
 
 void	test(t_game *game)
 {
-	int	i;
+	int	x;
 
-	i = 0;
-	while (i < GAME_WIDTH)
+	x = 0;
+	while (x < GAME_WIDHT)
 	{
-		calculate_ray_position_and_direction(game, i);
+		calculate_ray_position_and_direction(game, x);
 		calculate_step(game);
 		digital_differential_analysis(game);
 		calculate_distance(game);
 		calculate_vertical_line(game);
-		// Texture calculations
-		game->p.tex_num = game->map.map[game->p.map_y][game->p.map_x];
-		// Calculate value of wallX
-		if (game->p.side == 0)
-			game->p.wall_x = game->p.pos_x + game->p.perp_wal_dist * game->p.ray_dir_y;
-		else
-			game->p.wall_x = game->p.pos_x + game->p.perp_wal_dist * game->p.ray_dir_x;
-		game->p.wall_x -= floor(game->p.wall_x);
-		// X coordinate on the texture
-		game->p.tex_x = (int)(game->p.wall_x * (double)(texWidth));
-		if (game->p.side == 0 && game->p.ray_dir_x > 0)
-			game->p.tex_x = texWidth - game->p.tex_x - 1;
-		if (game->p.side == 1 && game->p.ray_dir_y < 0)
-			game->p.tex_x = texWidth - game->p.tex_x - 1;
-		// start from line 221 of file raycaster_textured.cpp
-		draw_vertical_line(game, i);
-		i++;
+		texture(game, x);
+		draw_vertical_line(game, x);
+		x++;
 	}
 }
