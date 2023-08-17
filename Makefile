@@ -12,12 +12,7 @@ SRCS :=	main.c \
 		screen/draw_screen.c \
 		screen/floor_and_ceiling.c \
 		screen/init_screen.c \
-		screen/draw_minimap.c \
-		screen/3d_walls.c \
-		screen/raycasting.c \
-		screen/draw_player.c \
-		hooks/arrow_keys.c \
-		test.c
+		test.c \
 
 SRCSDIR = srcs
 OBJDIR = obj

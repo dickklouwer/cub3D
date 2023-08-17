@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/09 14:45:02 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/17 16:33:34 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/17 18:48:28 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 void	init_orientation(t_game *game)
 {
-	if (game->player.orientation == 'N')
+	if (game->p.orientation == 'N')
 	{
 		game->p.dir_x = 0;
 		game->p.dir_y = -1;
 		game->p.plane_x = 0.66;
 		game->p.plane_y = 0;
 	}
-	if (game->player.orientation == 'S')
+	if (game->p.orientation == 'S')
 	{
 		game->p.dir_x = 0;
 		game->p.dir_y = 1;
 		game->p.plane_x = -0.66;
 		game->p.plane_y = 0;
 	}
-	if (game->player.orientation == 'E')
+	if (game->p.orientation == 'E')
 	{
 		game->p.dir_x = 1;
 		game->p.dir_y = 0;
 		game->p.plane_x = 0;
 		game->p.plane_y = 0.66;
 	}
-	if (game->player.orientation == 'W')
+	if (game->p.orientation == 'W')
 	{
 		game->p.dir_x = -1;
 		game->p.dir_y = 0;
@@ -54,9 +54,8 @@ void	init_textures(t_game *game)
 
 void	init_test(t_game *game)
 {
-	game->p.pos_x = game->player.sx - 0.5;
-	game->p.pos_y = game->player.sy - 0.5;
-	game->p.orientation = game->player.orientation;
+	game->p.pos_x = game->p.start_x + 0.5;
+	game->p.pos_y = game->p.start_y + 0.5;
 	game->p.pitch = 100;
 	init_orientation(game);
 	init_textures(game);
@@ -200,7 +199,6 @@ void	texture(t_game * game, int x)
 	// Calculate step and initial value
 	game->p.step = 1.0 * game->p.texture->height / game->p.line_height;
 	// Starting texture coordinate
-	// game->p.tex_pos = (game->p.line_start_y - GAME_HEIGHT / 2 + game->p.line_height / 2) * game->p.step;
 	game->p.tex_pos = (game->p.line_start_y - game->p.pitch - GAME_HEIGHT / 2 + game->p.line_height / 2) * game->p.step;
 }
 

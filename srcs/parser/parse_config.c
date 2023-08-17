@@ -6,29 +6,30 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:34:14 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/13 08:05:18 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/08/17 18:50:51 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	prep_map_data(t_map *map, t_player *player)
+void	prep_map_data(t_game *game)
 {
 	char	*temp;
 
-	while (get_next_line(map->map_fd, &temp) == 1)
+	game->p.player_count = 0;
+	while (get_next_line(game->map.map_fd, &temp) == 1)
 	{
-		if (ft_strlen(temp) > map->width)
-			map->width = ft_strlen(temp);
-		map_prerequisites(player, temp, map->map_y);
+		if (ft_strlen(temp) >game->map.width)
+			game->map.width = ft_strlen(temp);
+		map_prerequisites(game, temp, game->map.map_y);
 		free(temp);
-		map->map_y++;
+		game->map.map_y++;
 	}
-	map->map_y++;
-	map->height = map->map_y;
+	game->map.map_y++;
+	game->map.height = game->map.map_y;
 	free(temp);
-	close(map->map_fd);
-	if (player->player_count != 1)
+	close(game->map.map_fd);
+	if (game->p.player_count != 1)
 		err_exit("cub3D: More or less than 1 player ... ");
 }
 
@@ -42,7 +43,7 @@ int	check_map_start(t_game *game, char *line)
 	if (ft_strspn(line + i, "1 ") == ft_strlen(line + i))
 	{
 		game->map.map_y++;
-		prep_map_data(&game->map, &game->player);
+		prep_map_data(game);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -50,19 +51,19 @@ int	check_map_start(t_game *game, char *line)
 
 int check_dup_config_vars(t_config *config, char **line) 
 {
-    if (ft_strncmp("N", line[0], 2) == 0 && config->north_texture != NULL)
-        return EXIT_FAILURE;
-    else if (ft_strncmp("S", line[0], 2) == 0 && config->south_texture != NULL)
-        return EXIT_FAILURE;
-    else if (ft_strncmp("W", line[0], 2) == 0 && config->west_texture != NULL)
-        return EXIT_FAILURE;
-    else if (ft_strncmp("E", line[0], 2) == 0 && config->east_texture != NULL)
-        return EXIT_FAILURE;
-    else if (ft_strncmp("F", line[0], 1) == 0 && config->floor_color[0] != -1)
-        return EXIT_FAILURE;
-    else if (ft_strncmp("C", line[0], 1) == 0 && config->ceiling_color[0] != -1)
-        return EXIT_FAILURE;
-    return EXIT_SUCCESS;
+	if (ft_strncmp("N", line[0], 2) == 0 && config->north_texture != NULL)
+		return EXIT_FAILURE;
+	else if (ft_strncmp("S", line[0], 2) == 0 && config->south_texture != NULL)
+		return EXIT_FAILURE;
+	else if (ft_strncmp("W", line[0], 2) == 0 && config->west_texture != NULL)
+		return EXIT_FAILURE;
+	else if (ft_strncmp("E", line[0], 2) == 0 && config->east_texture != NULL)
+		return EXIT_FAILURE;
+	else if (ft_strncmp("F", line[0], 1) == 0 && config->floor_color[0] != -1)
+		return EXIT_FAILURE;
+	else if (ft_strncmp("C", line[0], 1) == 0 && config->ceiling_color[0] != -1)
+		return EXIT_FAILURE;
+	return EXIT_SUCCESS;
 }
 
 void	set_config_variables(t_config *config, char **line)

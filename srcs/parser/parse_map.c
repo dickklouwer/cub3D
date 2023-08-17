@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/07 11:44:19 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/11 09:59:30 by tklouwer      ########   odam.nl         */
+/*   Updated: 2023/08/17 19:09:12 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	read_till_map(t_map *map)
 	}
 }
 
-void	parse_map(t_map *map, t_player *player)
+void	parse_map(t_map *map)
 {
 	int		i;
 	char	*line;

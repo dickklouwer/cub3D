@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:56:30 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/07/12 18:53:20 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/17 19:10:58 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	flood_fill(int x, int y, t_map *map, char **map_line)
 	return (0);
 }
 
-
 int	check_dups(t_config *config)
 {
 	if (config->floor_color[0] == config->ceiling_color[0] && 
@@ -60,9 +59,8 @@ int	validate_variables(t_game *game)
 int	parse_game(t_game *game)
 {
 	parse_config(&game->config, game);
-	parse_map(&game->map, &game->player);
-	init_player(game);
+	parse_map(&game->map);
 	validate_variables(game);
-	flood_fill(game->player.sx, game->player.sy, &game->map, game->map.map_cpy);
+	flood_fill(game->p.start_x, game->p.start_y, &game->map, game->map.map_cpy);
 	return (EXIT_SUCCESS);
 }
