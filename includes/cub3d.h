@@ -6,15 +6,15 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/08/17 20:00:37 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/18 15:22:05 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#define GAME_WIDHT 1600
-#define GAME_HEIGHT 1200
+# define GAME_WIDHT 1600
+# define GAME_HEIGHT 1200
 
 # include <math.h>
 # include <stdlib.h>
@@ -27,7 +27,7 @@
 # include "../libs/libft/libft.h"
 # include "../libs/libft/get_next_line.h"
 
-typedef struct	s_map {
+typedef struct s_map {
 	char		*path;
 	char		**map;
 	char		**map_cpy;
@@ -40,9 +40,9 @@ typedef struct	s_map {
 	int			floor_rgb[3];
 	int			ceiling_rgb[3];
 	bool		update_screen;
-}				t_map;
+}	t_map;
 
-typedef struct	s_new_player {
+typedef struct s_new_player {
 	int				player_count;
 	int				start_x;
 	int				start_y;
@@ -52,6 +52,9 @@ typedef struct	s_new_player {
 	int				map_y;
 	char			orientation;
 	int				pitch;
+	double			move_speed;
+	double			rotate_speed;
+	double			space;
 	double			dir_x;
 	double			old_dir_x;
 	double			old_dir_y;
@@ -87,9 +90,9 @@ typedef struct	s_new_player {
 	mlx_texture_t	*texture_s;
 	mlx_texture_t	*texture_w;
 	int				color;
-}				t_new_player;
+}	t_new_player;
 
-typedef struct	s_config {
+typedef struct s_config {
 	char	*map_path;
 	char	*north_texture;
 	char	*south_texture;
@@ -106,7 +109,7 @@ typedef struct	s_config {
 	double	angle_step;
 	double	move_speed;
 	double	rotate_speed;
-}				t_config;
+}	t_config;
 
 typedef struct s_game
 {
@@ -126,16 +129,24 @@ size_t	ft_strspn(const char *str, const char *accept);
 void	prep_map_data(t_game *game);
 
 // INIT
-void	game_init(t_game *game, int	argc, char **argv);
+void	input_check(int argc, char **argv);
+void	config_init(t_config *config, char **argv);
+void	map_init(t_map *map, char **argv);
+void	init_player(t_game *game);
+void	init_orientation_ns(t_game *game);
+void	init_textures(t_game *game);
 
 // PARSE CONFIG
-void    parse_config(t_config *config, t_game *game);
+void	parse_config(t_game *game);
 
 // PARSER
-int		parse_game(t_game *game);
+int		parse_map_file(t_game *game);
+int		validate_config_variables(char **line);
+void	set_config_variables(t_config *config, char **line);
+int		check_dup_config_vars(t_config *config, char **line);
 
 // PARSE_MAP
-void	 parse_map(t_map *map);
+void	parse_map(t_map *map);
 
 // MAP_CHECKS
 void	map_prerequisites(t_game *game, char *line, int y);
@@ -145,6 +156,9 @@ void	init_screen(mlx_t **mlx);
 void	draw_screen(t_game *game);
 void	update_screen(t_game *game);
 void	draw_floor_and_cailing(t_game *game);
+void	calculate_step(t_game *game);
+void	calculate_texture_position(t_game *game);
+void	draw_vertical_line(t_game *game, int x);
 
 // PARSE UTILS
 void	parse_color(int *color, char *line);
@@ -154,11 +168,13 @@ size_t	ft_strspn(const char *str, const char *accept);
 // MINIMAP
 
 // HOOKS
-void	test_hook(void *param);
+void	key_pressed(void *param);
+void	key_down_left(t_game *game);
+void	key_down_right(t_game *game);
 
 int		check_dups(t_config *config);
 
 void	init_test(t_game *game);
-void	test(t_game *game);
+void	draw_walls(t_game *game);
 
 #endif

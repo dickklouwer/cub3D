@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 11:54:54 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/17 19:18:24 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/18 15:07:46 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ void	draw_floor_and_cailing(t_game *game)
 		x++;
 	}
 }
-

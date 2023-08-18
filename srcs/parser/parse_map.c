@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/07 11:44:19 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/08/17 19:09:12 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/18 14:51:34 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	read_till_map(t_map *map)
 	int		i;
 	char	*line;
 
+	i = 0;
 	while (i < map->map_start)
 	{
 		get_next_line(map->map_fd, &line);
@@ -45,7 +46,6 @@ void	read_till_map(t_map *map)
 void	parse_map(t_map *map)
 {
 	int		i;
-	char	*line;
 
 	i = 0;
 	map->map_fd = open(map->path, O_RDONLY);

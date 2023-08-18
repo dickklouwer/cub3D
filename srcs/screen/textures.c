@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   init_screen.c                                      :+:    :+:            */
+/*   textures.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/08 10:55:02 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/18 12:02:17 by bprovoos      ########   odam.nl         */
+/*   Created: 2023/08/18 11:54:43 by bprovoos      #+#    #+#                 */
+/*   Updated: 2023/08/18 11:54:49 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	init_screen(mlx_t **mlx)
+void	init_textures(t_game *game)
 {
-	*mlx = mlx_init(GAME_WIDHT, GAME_HEIGHT, "Cub3D", true);
-	if (!*mlx)
-		err_exit("Failed to initialize mlx");
+	game->p.texture_n = mlx_load_png(game->config.north_texture);
+	game->p.texture_s = mlx_load_png(game->config.south_texture);
+	game->p.texture_w = mlx_load_png(game->config.west_texture);
+	game->p.texture_e = mlx_load_png(game->config.east_texture);
 }

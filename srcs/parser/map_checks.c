@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/07 11:47:25 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/08/17 18:00:31 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/18 14:32:07 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ void	map_prerequisites(t_game *game, char *line, int y)
 		i++;
 	}
 }
-
