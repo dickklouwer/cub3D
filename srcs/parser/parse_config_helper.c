@@ -6,11 +6,23 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/18 14:36:30 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/18 14:53:29 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/21 18:30:32 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	free_config_variables(t_game *game)
+{
+	if (game->config.north_texture != NULL)
+		free(game->config.north_texture);
+	if (game->config.south_texture != NULL)
+		free(game->config.south_texture);
+	if (game->config.west_texture != NULL)
+		free(game->config.west_texture);
+	if (game->config.east_texture != NULL)
+		free(game->config.east_texture);
+}
 
 int	validate_config_variables(char **line)
 {

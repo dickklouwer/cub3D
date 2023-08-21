@@ -6,11 +6,24 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:47:29 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/06/23 15:58:01 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/21 19:33:58 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	free_2d_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
 
 int	ft_isdigit_cub3d(char *str)
 {
@@ -50,6 +63,8 @@ void	parse_color(int *color, char *line)
 		color[i] = ft_atoi(color_code[i]);
 		if (color[i] > 255 || color[i] < 0)
 			err_exit("Invalid color code");
+		free(color_code[i]);
 		i++;
 	}
+	free(color_code);
 }

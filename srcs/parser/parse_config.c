@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 13:34:14 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/08/18 14:53:47 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/21 19:49:30 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,14 @@ void	read_config_file(t_game *game)
 				err_exit("DUP");
 			set_config_variables(&game->config, split_line);
 			game->map_exe = check_map_start(game, line);
+			free_2d_array(split_line);
 			if (game->map_exe)
 				break ;
 		}
 		free(line);
 		game->map.map_start++;
 	}
+	free(line);
 	if (!game->map_exe)
 		err_exit("Map not compatible");
 }

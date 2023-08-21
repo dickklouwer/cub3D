@@ -6,7 +6,7 @@
 /*   By: tklouwer <tklouwer@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/06 11:16:03 by tklouwer      #+#    #+#                 */
-/*   Updated: 2023/08/18 15:22:05 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/08/21 19:54:51 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef struct s_map {
 	int			map_fd;
 	int			map_y;
 	int			map_x;
-	int			floor_rgb[3];
-	int			ceiling_rgb[3];
 	bool		update_screen;
 }	t_map;
 
@@ -135,6 +133,7 @@ void	map_init(t_map *map, char **argv);
 void	init_player(t_game *game);
 void	init_orientation_ns(t_game *game);
 void	init_textures(t_game *game);
+void	delete_textures(t_game *game);
 
 // PARSE CONFIG
 void	parse_config(t_game *game);
@@ -144,6 +143,7 @@ int		parse_map_file(t_game *game);
 int		validate_config_variables(char **line);
 void	set_config_variables(t_config *config, char **line);
 int		check_dup_config_vars(t_config *config, char **line);
+void	free_config_variables(t_game *game);
 
 // PARSE_MAP
 void	parse_map(t_map *map);
@@ -164,6 +164,7 @@ void	draw_vertical_line(t_game *game, int x);
 void	parse_color(int *color, char *line);
 int		ft_isdigit_cub3d(char *str);
 size_t	ft_strspn(const char *str, const char *accept);
+void	free_2d_array(char **array);
 
 // MINIMAP
 
