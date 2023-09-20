@@ -1,4 +1,3 @@
-
 #= Vars =#
 
 NAME = cub3D
