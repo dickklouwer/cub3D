@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/08 11:58:05 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/18 15:07:30 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/09/26 14:58:06 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	draw_screen(t_game *game)
 		err_exit("Failed to draw screen");
 	game->minimap = mlx_new_image(
 			game->mlx, game->map.height * 32, game->map.width * 32);
-	if (!game->minimap || 
-		(mlx_image_to_window(game->mlx, game->minimap, 0, 0) < 0))
+	if (!game->minimap
+		|| (mlx_image_to_window(game->mlx, game->minimap, 0, 0) < 0))
 		err_exit("Failed to draw miniscreen");
 	update_screen(game);
 }

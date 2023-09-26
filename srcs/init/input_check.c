@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/18 11:45:49 by bprovoos      #+#    #+#                 */
-/*   Updated: 2023/08/18 15:02:59 by bprovoos      ########   odam.nl         */
+/*   Updated: 2023/09/26 14:56:22 by tklouwer      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ int	st_file_check(char *file)
 	char	*filename;
 
 	filename = ft_strnstr(file, ".", ft_strlen(file) + 1);
-	if (!filename || 
-		ft_strncmp(filename, ".cub", 4) || 
-		ft_strlen(filename) != 4)
+	if (!filename || ft_strncmp(filename, ".cub", 4)
+		|| ft_strlen(filename) != 4)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
